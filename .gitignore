@@ -1,0 +1,5 @@
+/ext/gd/Makefile
+/ext/gd/mkmf.log
+/ext/gd/*.o
+/ext/gd/*.so
+/ext/gd/*.bundle
