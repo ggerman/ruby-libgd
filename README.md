@@ -1,2 +1,7 @@
+<p align="center">
+  <img src="logo.png" width="200" />
+</p>
+
 # ruby-libgd
-Native Ruby bindings for the GD graphics library, providing fast image processing, drawing, filters, and alpha-blending without external dependencies.
+
+Native Ruby bindings for the GD graphics library.

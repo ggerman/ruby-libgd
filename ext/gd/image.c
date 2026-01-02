@@ -1,0 +1,203 @@
+#include "ruby_gd.h"
+
+static VALUE gd_image_initialize(int argc, VALUE *argv, VALUE self) {
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+
+  wrap->img = NULL;
+
+  if (argc == 0) {
+    return self;
+  }
+  if (argc != 2) {
+    rb_raise(rb_eArgError, "expected 0 or 2 arguments");
+  }
+
+  int w = NUM2INT(argv[0]);
+  int h = NUM2INT(argv[1]);
+  if (w <= 0 || h <= 0)
+    rb_raise(rb_eArgError, "width and height must be positive");
+
+  wrap->img = gdImageCreateTrueColor(w, h);
+  if (!wrap->img)
+    rb_raise(rb_eRuntimeError, "gdImageCreateTrueColor failed");
+
+  return self;
+}
+
+static VALUE gd_image_initialize_empty(VALUE self) {
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+  wrap->img = NULL;
+  return self;
+}
+
+static VALUE gd_image_initialize_true_color(VALUE self, VALUE width, VALUE height) {
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+
+  if (wrap->img) {
+    gdImageDestroy(wrap->img);
+  }
+
+  int w = NUM2INT(width);
+  int h = NUM2INT(height);
+  if (w <= 0 || h <= 0) {
+    rb_raise(rb_eArgError, "width and height must be positive");
+  }
+
+  wrap->img = gdImageCreateTrueColor(w, h);
+  if (!wrap->img) {
+    rb_raise(rb_eRuntimeError, "failed to create true color image");
+  }
+
+  // Opcional: desactivar el fondo transparente si no lo necesitas
+  gdImageAlphaBlending(wrap->img, 1);
+  gdImageSaveAlpha(wrap->img, 0);
+
+  return self;
+}
+
+static VALUE gd_image_s_new_true_color(VALUE klass, VALUE width, VALUE height) {
+  VALUE obj = rb_class_new_instance(0, NULL, klass);
+  gd_image_initialize_true_color(obj, width, height);
+  return obj;
+}
+
+static VALUE gd_image_clone(VALUE self) {
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+
+  if (!wrap->img) rb_raise(rb_eRuntimeError, "cannot clone: image is NULL");
+
+  gdImagePtr copy = gdImageClone(wrap->img);
+  if (!copy) rb_raise(rb_eRuntimeError, "gdImageClone failed");
+
+  VALUE obj = rb_class_new_instance(0, NULL, CLASS_OF(self));
+  gd_image_wrapper *w2;
+  TypedData_Get_Struct(obj, gd_image_wrapper, &gd_image_type, w2);
+  w2->img = copy;
+
+  return obj;
+}
+
+static void gd_image_free(void *ptr) {
+  gd_image_wrapper *wrap = (gd_image_wrapper *)ptr;
+  if (!wrap) return;
+
+  if (wrap->img) {
+    gdImageDestroy(wrap->img);
+    wrap->img = NULL;
+  }
+}
+
+static size_t gd_image_memsize(const void *ptr) {
+  return ptr ? sizeof(gd_image_wrapper) : 0;
+}
+
+const rb_data_type_t gd_image_type = {
+  "GD::Image",
+  { 0, gd_image_free, gd_image_memsize, 0 },  // <-- dcompact agregado
+  0, 0,
+  RUBY_TYPED_FREE_IMMEDIATELY
+};
+
+static VALUE gd_image_alloc(VALUE klass) {
+  gd_image_wrapper *wrap;
+  VALUE obj = TypedData_Make_Struct(klass, gd_image_wrapper, &gd_image_type, wrap);
+  wrap->img = NULL;
+  return obj;
+}
+
+static VALUE gd_image_new(VALUE klass, VALUE w, VALUE h) {
+  VALUE obj = rb_class_new_instance(0, NULL, klass);
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(obj, gd_image_wrapper, &gd_image_type, wrap);
+
+  int width  = NUM2INT(w);
+  int height = NUM2INT(h);
+  if (width <= 0 || height <= 0)
+    rb_raise(rb_eArgError, "width and height must be positive");
+
+  wrap->img = gdImageCreateTrueColor(width, height);
+  if (!wrap->img) rb_raise(rb_eRuntimeError, "gdImageCreateTrueColor failed");
+  return obj;
+}
+
+static VALUE gd_image_open(VALUE klass, VALUE path) {
+  const char *filename = StringValueCStr(path);
+
+  FILE *f = fopen(filename, "rb");
+  if (!f) rb_sys_fail(filename);
+
+  gdImagePtr img = NULL;
+
+  const char *ext = strrchr(filename, '.');
+  if (!ext) rb_raise(rb_eArgError, "unknown image type");
+
+  if (strcmp(ext, ".png") == 0) {
+    img = gdImageCreateFromPng(f);
+  } else if (strcmp(ext, ".jpg") == 0 || strcmp(ext, ".jpeg") == 0) {
+    img = gdImageCreateFromJpeg(f);
+  } else if (strcmp(ext, ".webp") == 0) {
+    img = gdImageCreateFromWebp(f);
+  } else if (strcmp(ext, ".gif") == 0) {
+    img = gdImageCreateFromGif(f);
+  } else {
+    fclose(f);
+    rb_raise(rb_eArgError, "unsupported format");
+  }
+
+  fclose(f);
+  if (!img) rb_raise(rb_eRuntimeError, "image decode failed");
+
+  VALUE obj = rb_class_new_instance(0, NULL, klass);
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(obj, gd_image_wrapper, &gd_image_type, wrap);
+  wrap->img = img;
+
+  return obj;
+}
+
+static VALUE gd_image_alpha_blending(VALUE self, VALUE flag) {
+    gd_image_wrapper *wrap;
+    TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+
+    gdImageAlphaBlending(wrap->img, RTEST(flag));
+    return self;
+}
+
+static VALUE gd_image_save_alpha(VALUE self, VALUE flag) {
+    gd_image_wrapper *wrap;
+    TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+
+    gdImageSaveAlpha(wrap->img, RTEST(flag));
+    return self;
+}
+
+static VALUE gd_image_width(VALUE self) {
+    gd_image_wrapper *wrap;
+    TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+    return INT2NUM(gdImageSX(wrap->img));
+}
+
+static VALUE gd_image_height(VALUE self) {
+    gd_image_wrapper *wrap;
+    TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+    return INT2NUM(gdImageSY(wrap->img));
+}
+
+void gd_define_image(VALUE mGD) {
+  VALUE cGDImage = rb_define_class_under(mGD, "Image", rb_cObject);
+
+  rb_define_alloc_func(cGDImage, gd_image_alloc);
+
+  rb_define_method(cGDImage, "width",  gd_image_width,  0);
+  rb_define_method(cGDImage, "height", gd_image_height, 0);
+  rb_define_method(cGDImage, "initialize", gd_image_initialize, -1);
+  rb_define_method(cGDImage, "clone", gd_image_clone, 0);
+  rb_define_singleton_method(cGDImage, "open", gd_image_open, 1);
+  rb_define_singleton_method(cGDImage, "new_true_color", gd_image_s_new_true_color, 2);
+  rb_define_method(cGDImage, "alpha_blending=", gd_image_alpha_blending, 1);
+  rb_define_method(cGDImage, "save_alpha=", gd_image_save_alpha, 1);
+}
