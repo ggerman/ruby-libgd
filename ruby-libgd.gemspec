@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = "0.1.2"
   s.summary     = "Native Ruby bindings for libgd"
   s.description = "High-performance native Ruby bindings to libgd for image generation, drawing, filters, alpha blending, and transformations."
-  s.authors     = ["Germán Alberto Giménez Silva"]
+  s.authors     = ["Germán Alberto, Giménez Silva"]
   s.email       = ["ggerman@gmail.com"]
   s.homepage    = "https://github.com/ggerman/ruby-libgd"
   s.license     = "MIT"
