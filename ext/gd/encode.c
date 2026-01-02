@@ -1,17 +1,5 @@
 #include "ruby_gd.h"
 
-/**
-  - [ ] imagegif — Output image to browser or file
-  - [x] imagewbmp — Output image to browser or file
-  - [x] imagewebp — Output a WebP image to browser or file
-  - [ ] imagexbm — Output an XBM image to browser or file
-  - [x] imagepng — Output a PNG image to either the browser or a file
-  - [x] imagejpeg — Output image to browser or file
-  - [ ] imagegd — Output GD image to browser or file
-  - [ ] imagegd2 — Output GD2 image to browser or file
-  - [ ] imageavif — Output image to browser or file
-  - [ ] imagebmp — Output a BMP image to browser or file
- **/
 static VALUE gd_image_save(int argc, VALUE *argv, VALUE self) {
   VALUE path, opts;
   rb_scan_args(argc, argv, "11", &path, &opts);
@@ -28,6 +16,8 @@ static VALUE gd_image_save(int argc, VALUE *argv, VALUE self) {
   if (!f) rb_sys_fail(filename);
 
   if (strcmp(ext, ".png") == 0) {
+    gdImageSaveAlpha(wrap->img, 1);
+    gdImageAlphaBlending(wrap->img, 0);
     gdImagePng(wrap->img, f);
   } else if (strcmp(ext, ".jpg") == 0 || strcmp(ext, ".jpeg") == 0) {
     int quality = 90;

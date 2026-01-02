@@ -4,10 +4,7 @@ static VALUE gd_image_circle(VALUE self, VALUE cx, VALUE cy, VALUE r, VALUE colo
   gd_image_wrapper *wrap;
   TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
 
-  int red = NUM2INT(rb_ary_entry(color, 0));
-  int green = NUM2INT(rb_ary_entry(color, 1));
-  int blue = NUM2INT(rb_ary_entry(color, 2));
-  int c = gdImageColorAllocate(wrap->img, red, green, blue);
+  int c = color_to_gd(wrap->img, color);
 
   gdImageArc(wrap->img,
              NUM2INT(cx), NUM2INT(cy),
@@ -21,10 +18,7 @@ static VALUE gd_image_filled_circle(VALUE self, VALUE cx, VALUE cy, VALUE r, VAL
   gd_image_wrapper *wrap;
   TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
 
-  int red = NUM2INT(rb_ary_entry(color, 0));
-  int green = NUM2INT(rb_ary_entry(color, 1));
-  int blue = NUM2INT(rb_ary_entry(color, 2));
-  int c = gdImageColorAllocate(wrap->img, red, green, blue);
+  int c = color_to_gd(wrap->img, color);
 
   gdImageFilledEllipse(wrap->img,
                        NUM2INT(cx), NUM2INT(cy),

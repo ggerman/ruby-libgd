@@ -19,11 +19,7 @@ static VALUE gd_image_text(VALUE self, VALUE text, VALUE opts) {
   if (NIL_P(x) || NIL_P(y) || NIL_P(size) || NIL_P(color) || NIL_P(font))
     rb_raise(rb_eArgError, "missing options");
 
-  int r = NUM2INT(rb_ary_entry(color,0));
-  int g = NUM2INT(rb_ary_entry(color,1));
-  int b = NUM2INT(rb_ary_entry(color,2));
-
-  int fg = gdImageColorAllocate(wrap->img, r, g, b);
+  int fg = color_to_gd(wrap->img, color);
 
   int brect[8];
   char *err = gdImageStringFT(

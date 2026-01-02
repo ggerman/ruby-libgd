@@ -38,11 +38,7 @@ static VALUE gd_image_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2, V
     rb_raise(rb_eArgError, "color must be [r,g,b]");
   }
 
-  int r = NUM2INT(rb_ary_entry(color, 0));
-  int g = NUM2INT(rb_ary_entry(color, 1));
-  int b = NUM2INT(rb_ary_entry(color, 2));
-
-  int c = gdImageColorAllocate(wrap->img, r, g, b);
+  int c = color_to_gd(wrap->img, color);
   gdImageLine(wrap->img, NUM2INT(x1), NUM2INT(y1), NUM2INT(x2), NUM2INT(y2), c);
 
   return Qnil;

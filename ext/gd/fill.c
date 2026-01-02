@@ -10,13 +10,17 @@ static VALUE gd_image_fill(VALUE self, VALUE color) {
   if (!wrap || !wrap->img)
     rb_raise(rb_eRuntimeError, "uninitialized GD::Image");
 
-  int r = NUM2INT(rb_ary_entry(color,0));
-  int g = NUM2INT(rb_ary_entry(color,1));
-  int b = NUM2INT(rb_ary_entry(color,2));
-  int c = gdImageColorAllocate(wrap->img,r,g,b);
+  int c = color_to_gd(wrap->img, color);
 
-  gdImageFilledRectangle(wrap->img,0,0,wrap->img->sx,wrap->img->sy,c);
-  return Qnil;
+  gdImageFilledRectangle(
+    wrap->img,
+    0, 0,
+    gdImageSX(wrap->img) - 1,
+    gdImageSY(wrap->img) - 1,
+    c
+  );
+
+  return self;
 }
 
 void gd_define_fill(VALUE cGDImage) {
