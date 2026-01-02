@@ -134,23 +134,77 @@ img.filled_polygon(poly, GD::Color.rgb(240,200,0))
 img.save("shapes.png")
 ```
 
-## Why ruby-libgd?
+---
 
-Unlike ImageMagick-based solutions, ruby-libgd runs inside your Ruby process with:
+## Build & Runtime Environment
 
-- no shell calls
-- no temporary files
-- no external binaries
-- predictable performance
+**ruby-libgd** is developed and tested against **libgd 2.3.3** using a reproducible Docker environment.
 
-It is ideal for:
+This ensures that the native extension is compiled against a known, stable GD ABI and behaves consistently across systems.
 
-- web image generation
-- thumbnails
-- badges
-- charts
-- server-side graphics
-- data visualization
+Reference **Dockerfile**
+```dockerfile
+FROM ruby:3.3
+
+RUN apt update && apt -y upgrade
+RUN apt install -y \
+  libgd-dev \
+  libgd3 \
+  libgd-tools \
+  pkg-config \
+  ruby-dev \
+  build-essential \
+  valgrind
+
+RUN printf "prefix=/usr\n\
+exec_prefix=\${prefix}\n\
+libdir=\${exec_prefix}/lib/x86_64-linux-gnu\n\
+includedir=\${prefix}/include\n\
+\n\
+Name: gd\n\
+Description: GD Graphics Library\n\
+Version: 2.3\n\
+Libs: -L\${libdir} -lgd\n\
+Cflags: -I\${includedir}\n" \
+> /usr/lib/x86_64-linux-gnu/pkgconfig/gd.pc
+
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Enforce dependency lockfile reproducibility
+RUN bundle config --global frozen 1
+
+COPY . .
+
+```
+
+## Why this matters
+
+**ruby-libgd** is a native **C** extension. The exact **libgd** version and build flags directly affect:
+
+- Alpha blending
+
+- Color accuracy
+
+- Filter behavior
+
+- Memory safety
+
+
+Using a pinned, containerized build environment guarantees that:
+
+- The extension is compiled against libgd 2.3.x
+
+- pkg-config resolves the correct headers and linker flags
+
+- CI, contributors, and users see identical behavior
+
+
+This is especially important for GIS, map tiles, and image pipelines where pixel-level consistency matters.
 
 ## License
 
