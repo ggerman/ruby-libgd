@@ -1,5 +1,5 @@
-<p align="center">
-  <img src="logo.png" width="200" />
+<p align="right">
+  <img src="logo.png" width="160" />
 </p>
 
 # ruby-libgd
