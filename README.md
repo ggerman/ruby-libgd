@@ -11,6 +11,8 @@
 
 It is designed to be lightweight, embeddable, and suitable for web applications, automation, and graphics pipelines.
 
+[rubystacknews.com](https://rubystacknews.com/2026/01/02/rebuilding-rubys-image-processing-layer-why-ruby-libgd-matters-for-gis-and-the-future-of-ruby/)
+
 ---
 
 ## Features
@@ -179,6 +181,151 @@ img.save("full_fan_gradient.png")
 
 
 ![Full Fan Gradient](./docs/images/full_fan_gradient.png)
+
+## Native Raster Text Rendering in Ruby: Gradient Backgrounds and FreeType Labels
+
+```ruby
+require "gd"
+
+WIDTH  = 800
+HEIGHT = 400
+
+img = GD::Image.new(WIDTH, HEIGHT)
+
+# ----------------------------
+# Colors
+# ----------------------------
+black = [0, 0, 0]
+white = [255, 255, 255]
+
+# Gradient colors (Ruby red)
+top = [255, 106, 7]
+bottom = [38, 104, 109]
+
+# ----------------------------
+# Draw background gradient
+# ----------------------------
+(0...HEIGHT).each do |y|
+  t = y.to_f / (HEIGHT - 1)
+
+  r = (top[0] + (bottom[0] - top[0]) * t).to_i
+  g = (top[1] + (bottom[1] - top[1]) * t).to_i
+  b = (top[2] + (bottom[2] - top[2]) * t).to_i
+
+  img.line(0, y, WIDTH - 1, y, [r, g, b])
+end
+
+# ----------------------------
+# Text parameters
+# ----------------------------
+font = "./fonts/DejaVuSans-Bold.ttf"
+size = 40
+text = "RubyStackNews.com"
+
+# Approximate centering
+text_width  = (text.length * size * 0.6).to_i
+text_height = size
+
+x = (WIDTH  - (text_width + 20) )  / 3
+y = (HEIGHT + (text_height + 20) ) / 3
+
+# ----------------------------
+# Shadow
+# ----------------------------
+img.text(text,
+  x: x + 2,
+  y: y + 2,
+  size: size,
+  color: black,
+  font: font
+)
+
+# ----------------------------
+# Main text
+# ----------------------------
+img.text(text,
+  x: x,
+  y: y,
+  size: size,
+  color: white,
+  font: font
+)
+
+# ----------------------------
+# Save
+# ----------------------------
+img.save("rubystacknews-banner.png")
+
+puts "Generated rubystacknews-banner.png"
+require "gd"
+
+WIDTH  = 800
+HEIGHT = 400
+
+img = GD::Image.new(WIDTH, HEIGHT)
+
+# ----------------------------
+# Gradient background
+# ----------------------------
+top    = [120, 0, 0]
+bottom = [255, 60, 60]
+
+(0...HEIGHT).each do |y|
+  t = y.to_f / (HEIGHT - 1)
+
+  r = (top[0] + (bottom[0] - top[0]) * t).to_i
+  g = (top[1] + (bottom[1] - top[1]) * t).to_i
+  b = (top[2] + (bottom[2] - top[2]) * t).to_i
+
+  img.line(0, y, WIDTH - 1, y, GD::Color.rgb(r, g, b))
+end
+
+# ----------------------------
+# Text parameters
+# ----------------------------
+font = "./fonts/DejaVuSans-Bold.ttf"
+size = 48
+text = "RubyStackNews.com"
+
+# Aproximación razonable del ancho del texto
+# DejaVuSans-Bold es ~0.6 * font_size por carácter
+text_width = (text.length * size * 0.6).to_i
+text_height = size
+
+x = (WIDTH  - text_width)  / 2
+y = (HEIGHT + text_height) / 2
+
+# ----------------------------
+# Shadow
+# ----------------------------
+img.text(text,
+  x: x + 2,
+  y: y + 2,
+  size: size,
+  color: :black,
+  font: font
+)
+
+# ----------------------------
+# Main text
+# ----------------------------
+img.text(text,
+  x: x,
+  y: y,
+  size: size,
+  color: :white,
+  font: font
+)
+
+# ----------------------------
+# Save
+# ----------------------------
+img.save("rubystacknews-banner.png")
+puts "Generated rubystacknews-banner.png"
+
+```
+
+![rubystacknews](./docs/images/rubystacknews-banner.png)
 
 ---
 
