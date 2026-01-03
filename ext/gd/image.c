@@ -196,6 +196,30 @@ static VALUE gd_image_height(VALUE self) {
     return INT2NUM(gdImageSY(wrap->img));
 }
 
+static VALUE gd_image_copy(
+  VALUE self, VALUE src,
+  VALUE dx, VALUE dy,
+  VALUE sx, VALUE sy,
+  VALUE w, VALUE h
+) {
+  gd_image_wrapper *dst;
+  gd_image_wrapper *srcw;
+
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, dst);
+  TypedData_Get_Struct(src,  gd_image_wrapper, &gd_image_type, srcw);
+
+  gdImageCopy(
+    dst->img,
+    srcw->img,
+    NUM2INT(dx), NUM2INT(dy),
+    NUM2INT(sx), NUM2INT(sy),
+    NUM2INT(w),  NUM2INT(h)
+  );
+
+  return Qnil;
+}
+
+
 void gd_define_image(VALUE mGD) {
   VALUE cGDImage = rb_define_class_under(mGD, "Image", rb_cObject);
 
@@ -204,6 +228,7 @@ void gd_define_image(VALUE mGD) {
   rb_define_method(cGDImage, "width",  gd_image_width,  0);
   rb_define_method(cGDImage, "height", gd_image_height, 0);
   rb_define_method(cGDImage, "initialize", gd_image_initialize, -1);
+  rb_define_method(cGDImage, "copy", gd_image_copy, 7);
   rb_define_method(cGDImage, "clone", gd_image_clone, 0);
   rb_define_singleton_method(cGDImage, "open", gd_image_open, 1);
   rb_define_singleton_method(cGDImage, "new_true_color", gd_image_s_new_true_color, 2);
