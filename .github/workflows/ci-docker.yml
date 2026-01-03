@@ -1,0 +1,61 @@
+name: CI (Docker)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  docker-test:
+    name: Build Docker image and run tests (Ruby 3.3)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          # Build image using the Dockerfile at the repository root
+          docker build --pull -f Dockerfile -t ruby-libgd-ci:latest .
+
+      - name: Run compile, build, install and tests inside container
+        run: |
+          docker run --rm ruby-libgd-ci:latest bash -lc "
+            set -e
+            cd /app || cd /
+
+            echo '--- compile native extension (ext/gd) ---'
+            if [ -d ext/gd ]; then
+              cd ext/gd
+              make clean || true
+              ruby extconf.rb
+              make
+              cd ../..
+            else
+              echo 'ext/gd not found; skipping native build step'
+            fi
+
+            echo '--- build and install gem from local source ---'
+            if [ -f ruby-libgd.gemspec ]; then
+              gem build ruby-libgd.gemspec
+              gem_file=\$(ls ruby-libgd-*.gem 2>/dev/null | sort -V | tail -n 1 || true)
+              if [ -n \"\$gem_file\" ]; then
+                gem install \"\$gem_file\" --force
+              else
+                echo 'Built gem not found' && exit 1
+              fi
+            else
+              echo 'ruby-libgd.gemspec not found; cannot build gem' && exit 1
+            fi
+
+            echo '--- install test/dev gems globally ---'
+            gem install rspec chunky_png rake --no-document
+
+            echo '--- run specs against the installed gem (via RSpec runner) ---'
+            if [ -d spec ]; then
+              ruby -e \"require 'rspec/core'; exit RSpec::Core::Runner.run(['spec','--format','documentation'])\"
+            else
+              echo 'No spec directory found. Add specs under spec/ or update workflow.' && exit 78
+            fi
+          "
