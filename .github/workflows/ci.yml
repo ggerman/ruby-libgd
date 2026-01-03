@@ -1,8 +1,3 @@
-# GitHub Actions CI for ruby-libgd
-# - Runs on Ubuntu and macOS
-# - Tests multiple Ruby versions
-# - Installs libgd system deps
-# - Runs `bundle exec rspec`
 name: CI
 
 on:
@@ -18,7 +13,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        ruby-version: [2.7, 3.0, 3.1, 3.2]
+        # Test Ruby 3.3 and higher — adjust this list to add future versions you want to test
+        ruby-version: ['3.3', '3.4', '3.5']
 
     steps:
       - name: Checkout
@@ -42,19 +38,46 @@ jobs:
           brew update
           brew install pkg-config gd
 
-      - name: Install bundler and gems
+      - name: Install bundler and project gems
         run: |
           gem install bundler
           bundle config set --local deployment 'false'
-          bundle install --jobs 4 --retry 3
+          if [ -f Gemfile ]; then
+            bundle install --jobs 4 --retry 3
+          else
+            echo "Gemfile not found; CI expects you to upload a Gemfile so dev/test gems like rspec are installed."
+          fi
 
-      - name: Compile native extension (if present)
+      - name: Compile native extension (ext/gd)
         run: |
-          # If there's a rake compile task or an ext directory, attempt a build (best-effort)
-          if bundle exec rake -T 2>/dev/null | grep -q compile; then
-            bundle exec rake compile
-          elif [ -d ext ] || [ -f ext/extconf.rb ]; then
-            bundle exec rake compile || true
+          set -e
+          if [ -d "ext/gd" ]; then
+            cd ext/gd
+            make clean || true
+            ruby extconf.rb
+            make
+            cd ../..
+          else
+            echo "ext/gd not found; skipping native build step"
+          fi
+
+      - name: Build and install gem (skipped if Gemfile points to local path)
+        run: |
+          set -e
+          if [ -f Gemfile ] && grep -q 'gem *"ruby-libgd"[[:space:]]*,[[:space:]]*path:' Gemfile 2>/dev/null; then
+            echo "Gemfile uses local path for ruby-libgd; skipping gem build/install"
+          else
+            if [ -f "ruby-libgd.gemspec" ]; then
+              gem build ruby-libgd.gemspec
+              gem_file=$(ls ruby-libgd-*.gem 2>/dev/null | sort -V | tail -n 1 || true)
+              if [ -n "$gem_file" ]; then
+                gem install "$gem_file" --force
+              else
+                echo "Built gem not found; continuing"
+              fi
+            else
+              echo "ruby-libgd.gemspec not found; skipping gem build/install"
+            fi
           fi
 
       - name: Run specs
@@ -62,6 +85,6 @@ jobs:
           if [ -d spec ]; then
             bundle exec rspec --format documentation
           else
-            echo "No spec directory found. Add specs or update .github/workflows/ci.yml to use your test command."
+            echo "No spec directory found. Add specs under spec/ or update the workflow test command."
             exit 78
           fi
