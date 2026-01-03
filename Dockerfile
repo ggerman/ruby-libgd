@@ -20,7 +20,7 @@ ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 WORKDIR /app
 COPY . .
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile ./
 RUN bundle install
 
 # throw errors if Gemfile has been modified since Gemfile.lock
