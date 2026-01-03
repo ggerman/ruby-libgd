@@ -1,0 +1,61 @@
+name: CI (Docker)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  docker-test:
+    name: Build Docker image and run tests (Ruby 3.3+)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          # Build image using the Dockerfile in the repo root. The image will contain Ruby 3.3 as in your Dockerfile.
+          docker build -t ruby-libgd-ci:latest .
+
+      - name: Run compile, build, install and tests inside container
+        run: |
+          docker run --rm ruby-libgd-ci:latest bash -lc "
+            set -e
+            cd /app
+
+            echo '--- compile native extension (ext/gd) ---'
+            if [ -d ext/gd ]; then
+              cd ext/gd
+              make clean || true
+              # If you need custom flags for extconf.rb, you can add them here:
+              # ruby extconf.rb --with-gdlib=/usr/local
+              ruby extconf.rb
+              make
+              cd ../..
+            else
+              echo 'ext/gd not found; skipping native build step'
+            fi
+
+            echo '--- build and install gem from local source ---'
+            if [ -f ruby-libgd.gemspec ]; then
+              gem build ruby-libgd.gemspec
+              gem_file=\$(ls ruby-libgd-*.gem 2>/dev/null | sort -V | tail -n 1 || true)
+              if [ -n \"\$gem_file\" ]; then
+                gem install \"\$gem_file\" --force
+              else
+                echo 'Built gem not found' && exit 1
+              fi
+            else
+              echo 'ruby-libgd.gemspec not found; cannot build gem' && exit 1
+            fi
+
+            echo '--- install test/dev gems globally and run specs against installed gem ---'
+            gem install rspec chunky_png rake --no-document
+            if [ -d spec ]; then
+              rspec --format documentation
+            else
+              echo 'No spec directory found. Add specs under spec/ or update workflow.' && exit 78
+            fi
+          "
