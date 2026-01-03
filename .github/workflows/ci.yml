@@ -1,0 +1,67 @@
+# GitHub Actions CI for ruby-libgd
+# - Runs on Ubuntu and macOS
+# - Tests multiple Ruby versions
+# - Installs libgd system deps
+# - Runs `bundle exec rspec`
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }} / Ruby ${{ matrix.ruby-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        ruby-version: [2.7, 3.0, 3.1, 3.2]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          cache: bundler
+
+      - name: Install system dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config libgd-dev libpng-dev libjpeg-dev zlib1g-dev libfreetype6-dev
+
+      - name: Install system dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install pkg-config gd
+
+      - name: Install bundler and gems
+        run: |
+          gem install bundler
+          bundle config set --local deployment 'false'
+          bundle install --jobs 4 --retry 3
+
+      - name: Compile native extension (if present)
+        run: |
+          # If there's a rake compile task or an ext directory, attempt a build (best-effort)
+          if bundle exec rake -T 2>/dev/null | grep -q compile; then
+            bundle exec rake compile
+          elif [ -d ext ] || [ -f ext/extconf.rb ]; then
+            bundle exec rake compile || true
+          fi
+
+      - name: Run specs
+        run: |
+          if [ -d spec ]; then
+            bundle exec rspec --format documentation
+          else
+            echo "No spec directory found. Add specs or update .github/workflows/ci.yml to use your test command."
+            exit 78
+          fi
