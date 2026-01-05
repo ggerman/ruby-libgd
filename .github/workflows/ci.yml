@@ -1,0 +1,18 @@
+name: ruby-libgd CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  native:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t ruby-libgd-ci .
+
+      - name: Run RSpec
+        run: docker run --rm ruby-libgd-ci

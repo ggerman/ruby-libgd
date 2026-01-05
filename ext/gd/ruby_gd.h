@@ -21,8 +21,9 @@ void gd_define_fill(VALUE cGDImage);
 void gd_define_pixel(VALUE cGDImage);
 void gd_define_line(VALUE cGDImage);
 void gd_define_arc(VALUE cGDImage);
-void gd_define_rect(VALUE cGDImage);
+void gd_define_rectangle(VALUE cGDImage);
 void gd_define_circle(VALUE cGDImage);
+void gd_define_ellipse(VALUE cGDImage);
 void gd_define_polygon(VALUE cGDImage);
 
 void gd_define_text(VALUE cGDImage);
