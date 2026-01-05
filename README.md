@@ -45,7 +45,7 @@ white = GD::Color.rgb(255,255,255)
 red   = GD::Color.rgb(180,0,0)
 blue  = GD::Color.rgb(0,120,255)
 
-img.filled_rect(0,0,600,400, white)
+img.filled_rectangle(0,0,600,400, white)
 img.filled_circle(300,200,120, red)
 img.arc(300,200,240,240,0,360, blue)
 
@@ -63,7 +63,7 @@ img.alpha_blending = true
 bg = GD::Color.rgba(0,0,0,127)      # fully transparent
 red = GD::Color.rgba(255,0,0,64)    # semi-transparent red
 
-img.filled_rect(0,0,300,300, bg)
+img.filled_rectangle(0,0,300,300, bg)
 img.filled_circle(150,150,100, red)
 
 img.save("alpha.png")
@@ -123,7 +123,7 @@ blue  = GD::Color.rgb(0,120,255)
 green = GD::Color.rgb(0,200,120)
 
 img.line(50,50,350,350, blue)
-img.rect(50,50,350,350, blue)
+img.rectangle(50,50,350,350, blue)
 img.filled_circle(200,200,80, green)
 
 poly = [
