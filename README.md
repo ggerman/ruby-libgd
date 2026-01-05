@@ -4,8 +4,15 @@
   <img src="docs/images/logo.png" width="160" />
 </p>
 
-# ruby-libgd
-Native GD bindings for modern Ruby
+
+## Library Status
+
+| Implemented | Implemented | Coming Next |
+| :--: | :--: | :--: |
+| <img src="./examples/charts/images/fruit_chart_with_text.png" width="200"> | <img src="./examples/charts/images/pie_chart.png" width="200"> | <img src="./examples/maps/parana_paracao_route.png" width="200"> |
+| <img src="./examples/image_processing/images/processed.jpg" width="200"> | <img src="./examples/charts/images/stem_plot.png" width="200"> | <img src="./examples/maps/parana_paracao_polygon.png" width="200"> |
+
+## Native GD bindings for modern Ruby
 
 ![RubyStackNews](examples/images/rubystacknews-banner.png)
 
@@ -142,11 +149,6 @@ examples/
 
 Each Ruby script in examples/ generates an image in examples/images/.
 
-## Sample output
-|  |  |
-| :--: | :--: |
-| <img src="./examples/charts/images/fruit_chart_with_text.png" width="200"> | <img src="./examples/charts/images/pie_chart.png" width="200"> |
-| <img src="./examples/image_processing/images/processed.jpg" width="200"> | <img src="./examples/charts/images/stem_plot.png" width="200"> |
 
 ## Links
 
