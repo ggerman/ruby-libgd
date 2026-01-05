@@ -72,8 +72,9 @@ void Init_gd(void) {
   gd_define_pixel(cGDImage);
   gd_define_line(cGDImage);
   gd_define_arc(cGDImage);
-  gd_define_rect(cGDImage);
+  gd_define_rectangle(cGDImage);
   gd_define_circle(cGDImage);
+  gd_define_ellipse(cGDImage);
   gd_define_polygon(cGDImage);
 
   gd_define_text(cGDImage);

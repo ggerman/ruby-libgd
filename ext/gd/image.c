@@ -196,7 +196,7 @@ static VALUE gd_image_height(VALUE self) {
     return INT2NUM(gdImageSY(wrap->img));
 }
 
-static VALUE gd_image_copy(
+static VALUE gd_image_copy (
   VALUE self, VALUE src,
   VALUE dx, VALUE dy,
   VALUE sx, VALUE sy,
@@ -218,7 +218,6 @@ static VALUE gd_image_copy(
 
   return Qnil;
 }
-
 
 void gd_define_image(VALUE mGD) {
   VALUE cGDImage = rb_define_class_under(mGD, "Image", rb_cObject);
