@@ -38,7 +38,7 @@ Line thickness is now correctly propagated to libgd:
 ```ruby
 img.thickness(4)
 img.line(10, 10, 200, 200, color)
-
+```
 
 ## [0.1.3] – Native CI, Drawing API fixes
 
