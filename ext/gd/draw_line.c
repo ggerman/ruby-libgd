@@ -2,7 +2,17 @@
 #include "ruby_gd.h"
 #include "clip.h"
 
-static VALUE gd_image_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2, VALUE color) {
+static VALUE gd_image_line(int argc, VALUE *argv, VALUE self) {
+  VALUE x1, y1, x2, y2, color, opts;
+  opts = Qnil;
+
+  rb_scan_args(argc, argv, "5:", &x1, &y1, &x2, &y2, &color, &opts);
+
+  VALUE thickness = Qnil;
+  if (!NIL_P(opts)) {
+    thickness = rb_hash_aref(opts, ID2SYM(rb_intern("thickness")));
+  }
+
   gd_image_wrapper *wrap;
   TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
 
@@ -39,11 +49,17 @@ static VALUE gd_image_line(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2, V
   }
 
   int c = color_to_gd(wrap->img, color);
+  int old = 1;
+
+  if (!NIL_P(thickness)) {
+    gdImageSetThickness(wrap->img, NUM2INT(thickness));
+  }
   gdImageLine(wrap->img, NUM2INT(x1), NUM2INT(y1), NUM2INT(x2), NUM2INT(y2), c);
+  gdImageSetThickness(wrap->img, old);
 
   return Qnil;
 }
 
 void gd_define_line(VALUE cGDImage) {
-  rb_define_method(cGDImage, "line", gd_image_line, 5);
+  rb_define_method(cGDImage, "line", gd_image_line, -1);
 }
