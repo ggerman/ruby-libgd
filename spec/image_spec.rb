@@ -15,7 +15,7 @@ RSpec.describe GD::Image do
 
       # Fill source with red
       red = [255, 0, 0, 0]
-      src.filled_rect(0, 0, 49, 49, red)
+      src.filled_rectangle(0, 0, 49, 49, red)
 
       # Copy into destination at (10,10)
       dst.copy(src, 10, 10, 0, 0, 50, 50)
@@ -33,8 +33,8 @@ RSpec.describe GD::Image do
       green = [0, 255, 0, 0]
       blue  = [0, 0, 255, 0]
 
-      src.filled_rect(0, 0, 19, 19, green)
-      dst.filled_rect(0, 0, 39, 39, blue)
+      src.filled_rectangle(0, 0, 19, 19, green)
+      dst.filled_rectangle(0, 0, 39, 39, blue)
 
       dst.copy(src, 10, 10, 0, 0, 20, 20)
 

@@ -7,7 +7,6 @@ Gem::Specification.new do |s|
   s.email       = ["ggerman@gmail.com"]
   s.homepage    = "https://github.com/ggerman/ruby-libgd"
   s.license     = "MIT"
-
   s.files       = Dir["lib/**/*", "ext/**/*", "README.md", "LICENSE", "CHANGELOG.md"]
   s.extensions  = ["ext/gd/extconf.rb"]
   s.require_paths = ["lib", "ext"]
