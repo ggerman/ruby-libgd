@@ -2,8 +2,69 @@
 
 All notable changes to this project will be documented in this file.  
 This project follows semantic versioning.
-
 ---
+
+## **v0.1.6 — Sepia filter & color-pipeline expansion**
+
+**Release date:** 2026-01-05
+
+This release introduces **native sepia rendering** and continues the expansion of ruby-libgd into a full **image processing and raster graphics engine**.
+
+### ✨ New features
+
+**Native sepia filter**
+
+- Added `image.filter(:sepia)` — a true pixel-level sepia transformation
+- Implemented in C using a color-matrix transform (no ImageMagick, no external tools)
+- Produces consistent photographic-grade sepia tones
+
+**New example**
+
+- Added a runnable example demonstrating:
+  - loading an image
+  - applying sepia
+  - saving the transformed result
+
+This example serves as both documentation and a regression test for the filter pipeline.
+
+------
+
+### 🔧 Technical details
+
+- Sepia is implemented as a raster-space color matrix applied per pixel:
+
+  ```
+  R' = 0.393R + 0.769G + 0.189B
+  G' = 0.349R + 0.686G + 0.168B
+  B' = 0.272R + 0.534G + 0.131B
+  ```
+
+- Integrated into the existing `image.filter(...)` dispatcher
+
+- No dependency on libgd filters — this is a native ruby-libgd extension
+
+------
+
+### 🚀 Why this matters
+
+With sepia added, ruby-libgd now supports:
+
+- grayscale
+- brightness
+- contrast
+- blur
+- pixelation
+- edge detection
+- **photographic color transforms**
+
+This moves the project beyond bindings and into the territory of a **modern Ruby image processing engine**, suitable for:
+
+- dashboards
+- reports
+- map tiles
+- historical GIS rendering
+- photo pipelines
+
 
 ## [0.1.5] – Native CI, Drawing API fixes
 
