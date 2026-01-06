@@ -50,6 +50,26 @@ p.lead {
   background: #0ea5e9;
 }
 
+.connect-bar {
+  background:#f1f5f9;
+  padding:40px 20px;
+  text-align:center;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.connect-links {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:28px;
+  font-size:1.1rem;
+}
+
+.connect-links a {
+  text-decoration:none;
+  font-weight:600;
+}
+
 section {
   padding: 80px 40px;
   max-width: 1200px;
@@ -103,15 +123,32 @@ footer a {
   </div>
 </header>
 
+<div class="connect-bar">
+  <h3>Connect</h3>
+  <div class="connect-links">
+    <a href="mailto:ggerman@gmail.com" style="color:#1e40af;">📧 Email</a>
+    <a href="https://wa.me/5493434192620" target="_blank" style="color:#059669;">💬 WhatsApp</a>
+    <a href="https://rubystacknews.com" target="_blank" style="color:#7c3aed;">🌐 RubyStackNews</a>
+    <a href="https://x.com/ruby_stack_news" target="_blank" style="color:#0284c7;">🐦 Twitter</a>
+    <a href="https://www.linkedin.com/in/germ%C3%A1n-silva-56a12622/" target="_blank" style="color:#0a66c2;">💼 LinkedIn</a>
+  </div>
+</div>
+
 <section>
-  <h2>Library Status</h2>
+  <h2>Visual Showcase</h2>
   <div class="grid">
-    <img src="../examples/charts/images/fruit_chart_with_text.png" />
-    <img src="../examples/charts/images/pie_chart.png" />
-    <img src="../examples/image_processing/images/processed.jpg" />
-    <img src="../examples/charts/images/stem_plot.png" />
-    <img src="../examples/basics/images/vintage.jpg" />
-    <img src="../examples/maps/parana_paracao_route.png" />
+    <img src="images/examples/fruit_chart_with_text.png">
+    <img src="images/examples/pie_chart.png">
+    <img src="images/examples/stem_plot.png">
+    <img src="images/examples/horizontal_bar_chart_640.png">
+    <img src="images/examples/world_population.png">
+    <img src="images/examples/vintage.jpg">
+    <img src="images/examples/processed.jpg">
+    <img src="images/examples/photo.png">
+    <img src="images/examples/merged.png">
+    <img src="images/examples/parana_paracao_route.png">
+    <img src="images/examples/parana_paracao_polygon.png">
+    <img src="images/examples/rubystacknews-banner.png">
   </div>
 </section>
 
@@ -134,22 +171,11 @@ footer a {
 </section>
 
 <section>
-  <h2>Example output</h2>
-  <img src="../examples/images/rubystacknews-banner.png" style="width:100%;border-radius:16px;">
+  <h2>Example Render</h2>
+  <img src="images/examples/rubystacknews-banner.png" style="width:100%;border-radius:16px;">
 </section>
 
 <footer>
-  <div style="margin-bottom:30px;">
-    <h3>Connect</h3>
-    <p style="font-size:1.1rem; line-height:2;">
-      📧 <a href="mailto:ggerman@gmail.com">ggerman@gmail.com</a><br>
-      💬 <a href="https://wa.me/5493434192620" target="_blank">WhatsApp</a><br>
-      🌐 <a href="https://rubystacknews.com" target="_blank">RubyStackNews</a><br>
-      🐦 <a href="https://x.com/ruby_stack_news" target="_blank">@RubyStackNews</a><br>
-      💼 <a href="https://www.linkedin.com/in/germ%C3%A1n-silva-56a12622/" target="_blank">Germán Silva on LinkedIn</a>
-    </p>
-  </div>
-
   <p>
     ruby-libgd is MIT licensed.  
     Built by Germán Silva.
