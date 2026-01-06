@@ -1,6 +1,29 @@
 #include "ruby_gd.h"
 #include <string.h>
 
+static void gd_image_apply_sepia(gdImagePtr img) {
+  int x, y;
+  for (y = 0; y < img->sy; y++) {
+    for (x = 0; x < img->sx; x++) {
+      int c = gdImageGetTrueColorPixel(img, x, y);
+
+      int r = gdTrueColorGetRed(c);
+      int g = gdTrueColorGetGreen(c);
+      int b = gdTrueColorGetBlue(c);
+
+      int tr = (int)(0.393*r + 0.769*g + 0.189*b);
+      int tg = (int)(0.349*r + 0.686*g + 0.168*b);
+      int tb = (int)(0.272*r + 0.534*g + 0.131*b);
+
+      if (tr > 255) tr = 255;
+      if (tg > 255) tg = 255;
+      if (tb > 255) tb = 255;
+
+      gdImageSetPixel(img, x, y, gdTrueColor(tr, tg, tb));
+    }
+  }
+}
+
 static VALUE gd_image_filter(int argc, VALUE *argv, VALUE self) {
   VALUE type, arg1, arg2, arg3, arg4;
   rb_scan_args(argc, argv, "14", &type, &arg1, &arg2, &arg3, &arg4);
@@ -57,6 +80,9 @@ static VALUE gd_image_filter(int argc, VALUE *argv, VALUE self) {
       NUM2INT(arg1),
       NUM2INT(arg2)
     );
+  }
+  else if (strcmp(name, "sepia") == 0) {
+    gd_image_apply_sepia(wrap->img);
   }
   else {
     rb_raise(rb_eArgError, "unknown filter");
