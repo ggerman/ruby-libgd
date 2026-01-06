@@ -2,7 +2,6 @@
 
 All notable changes to this project will be documented in this file.  
 This project follows semantic versioning.
-
 ---
 
 ## **v0.1.6 — Sepia filter & color-pipeline expansion**
@@ -65,6 +64,7 @@ This moves the project beyond bindings and into the territory of a **modern Ruby
 - map tiles
 - historical GIS rendering
 - photo pipelines
+
 
 ## [0.1.5] – Native CI, Drawing API fixes
 

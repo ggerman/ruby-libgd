@@ -1,18 +1,135 @@
 # Ruby Libgd
 
+<p align="center">
+  <a href="https://rubystacknews.com">
+    <img src="https://img.shields.io/badge/RubyStackNews-CC342D?style=for-the-badge&logo=ruby&logoColor=white" />
+  </a>
+  <a href="https://x.com/ruby_stack_news">
+    <img src="https://img.shields.io/badge/Twitter%20%40RubyStackNews-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
+  </a>
+  <a href="https://www.linkedin.com/in/germ%C3%A1n-silva-56a12622/">
+    <img src="https://img.shields.io/badge/Germán%20Silva-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+</p>
+
 <p align="right">
   <img src="docs/images/logo.png" width="160" />
 </p>
-
 
 ## Library Status
 
 | Implemented | Implemented | Coming Next |
 | :--: | :--: | :--: |
-| <img src="./examples/charts/images/fruit_chart_with_text.png" width="200"> | <img src="./examples/charts/images/pie_chart.png" width="200"> | <img src="./examples/maps/parana_paracao_route.png" width="200"> |
-| <img src="./examples/image_processing/images/processed.jpg" width="200"> | <img src="./examples/charts/images/stem_plot.png" width="200"> | <img src="./examples/maps/parana_paracao_polygon.png" width="200"> |
+| <img src="./examples/charts/images/fruit_chart_with_text.png" width="250"> | <img src="./examples/charts/images/pie_chart.png" width="250"> | <img src="./examples/maps/parana_paracao_route.png" width="250"> |
+| <img src="./examples/image_processing/images/processed.jpg" width="250"> | <img src="./examples/charts/images/stem_plot.png" width="250"> | <img src="./examples/maps/parana_paracao_polygon.png" width="250"> |
 
-## Native GD bindings for modern Ruby
+# Native GD bindings for modern Ruby
+## What is ruby-libgd?
+
+ruby-libgd is a modern native Ruby binding to the GD Graphics Library, providing Ruby with a fast, embeddable, server-side graphics engine.
+
+It enables Ruby to generate images, charts, dashboards, GIS tiles, and scientific graphics without spawning external processes.
+
+## Installation
+
+`gem install ruby-libgd`
+
+System dependencies:
+
+`apt install -y libgd-dev pkg-config`
+
+## Examples
+
+All runnable examples live in:
+
+examples/
+  basics/
+  image_processing/
+  charts/
+  images/
+
+Each Ruby script in examples/ generates an image in examples/images/.
+
+
+## Links
+
+GitHub: https://github.com/ggerman/ruby-libgd  
+RubyGems: https://rubygems.org/gems/ruby-libgd  
+Article: https://rubystacknews.com/2026/01/05/ruby-can-create-images-again/
+
+---
+
+## Build & Runtime Environment
+
+**ruby-libgd** is developed and tested against **libgd 2.3.3** using a reproducible Docker environment.
+
+This ensures that the native extension is compiled against a known, stable GD ABI and behaves consistently across systems.
+
+Reference **Dockerfile**
+```dockerfile
+FROM ruby:3.3
+
+RUN apt update && apt -y upgrade
+RUN apt install -y \
+  libgd-dev \
+  libgd3 \
+  libgd-tools \
+  pkg-config \
+  ruby-dev \
+  build-essential \
+  valgrind
+
+RUN printf "prefix=/usr\n\
+exec_prefix=\${prefix}\n\
+libdir=\${exec_prefix}/lib/x86_64-linux-gnu\n\
+includedir=\${prefix}/include\n\
+\n\
+Name: gd\n\
+Description: GD Graphics Library\n\
+Version: 2.3\n\
+Libs: -L\${libdir} -lgd\n\
+Cflags: -I\${includedir}\n" \
+> /usr/lib/x86_64-linux-gnu/pkgconfig/gd.pc
+
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Enforce dependency lockfile reproducibility
+RUN bundle config --global frozen 1
+
+COPY . .
+
+```
+
+## Why this matters
+
+**ruby-libgd** is a native **C** extension. The exact **libgd** version and build flags directly affect:
+
+- Alpha blending
+
+- Color accuracy
+
+- Filter behavior
+
+- Memory safety
+
+
+Using a pinned, containerized build environment guarantees that:
+
+- The extension is compiled against libgd 2.3.x
+
+- pkg-config resolves the correct headers and linker flags
+
+- CI, contributors, and users see identical behavior
+
+
+This is especially important for GIS, map tiles, and image pipelines where pixel-level consistency matters.
+
+## Example:
 
 ![RubyStackNews](examples/images/rubystacknews-banner.png)
 
@@ -122,111 +239,6 @@ img.save("images/rubystacknews-banner.png")
 puts "Saved images/rubystacknews-banner.png"
 
 ```
-
-## What is ruby-libgd?
-
-ruby-libgd is a modern native Ruby binding to the GD Graphics Library, providing Ruby with a fast, embeddable, server-side graphics engine.
-
-It enables Ruby to generate images, charts, dashboards, GIS tiles, and scientific graphics without spawning external processes.
-
-## Installation
-
-`gem install ruby-libgd`
-
-System dependencies:
-
-`apt install -y libgd-dev pkg-config`
-
-## Examples
-
-All runnable examples live in:
-
-examples/
-  basics/
-  image_processing/
-  charts/
-  images/
-
-Each Ruby script in examples/ generates an image in examples/images/.
-
-
-## Links
-
-GitHub: https://github.com/ggerman/ruby-libgd  
-RubyGems: https://rubygems.org/gems/ruby-libgd  
-Article: https://rubystacknews.com/2026/01/05/ruby-can-create-images-again/
-
----
-
-## Build & Runtime Environment
-
-**ruby-libgd** is developed and tested against **libgd 2.3.3** using a reproducible Docker environment.
-
-This ensures that the native extension is compiled against a known, stable GD ABI and behaves consistently across systems.
-
-Reference **Dockerfile**
-```dockerfile
-FROM ruby:3.3
-
-RUN apt update && apt -y upgrade
-RUN apt install -y \
-  libgd-dev \
-  libgd3 \
-  libgd-tools \
-  pkg-config \
-  ruby-dev \
-  build-essential \
-  valgrind
-
-RUN printf "prefix=/usr\n\
-exec_prefix=\${prefix}\n\
-libdir=\${exec_prefix}/lib/x86_64-linux-gnu\n\
-includedir=\${prefix}/include\n\
-\n\
-Name: gd\n\
-Description: GD Graphics Library\n\
-Version: 2.3\n\
-Libs: -L\${libdir} -lgd\n\
-Cflags: -I\${includedir}\n" \
-> /usr/lib/x86_64-linux-gnu/pkgconfig/gd.pc
-
-ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
-
-WORKDIR /app
-
-COPY Gemfile Gemfile.lock ./
-RUN bundle install
-
-# Enforce dependency lockfile reproducibility
-RUN bundle config --global frozen 1
-
-COPY . .
-
-```
-
-## Why this matters
-
-**ruby-libgd** is a native **C** extension. The exact **libgd** version and build flags directly affect:
-
-- Alpha blending
-
-- Color accuracy
-
-- Filter behavior
-
-- Memory safety
-
-
-Using a pinned, containerized build environment guarantees that:
-
-- The extension is compiled against libgd 2.3.x
-
-- pkg-config resolves the correct headers and linker flags
-
-- CI, contributors, and users see identical behavior
-
-
-This is especially important for GIS, map tiles, and image pipelines where pixel-level consistency matters.
 
 ## License
 
