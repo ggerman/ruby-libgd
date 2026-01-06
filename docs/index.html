@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>ruby-libgd — Native Graphics Engine for Ruby</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f7f9fc;
+  color: #1f2937;
+}
+
+header {
+  background: linear-gradient(135deg, #faf5ff, #e0f2fe);
+  padding: 80px 40px;
+  text-align: center;
+}
+
+header img {
+  max-width: 200px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-top: 20px;
+}
+
+p.lead {
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 20px auto;
+  color: #374151;
+}
+
+.buttons a {
+  display: inline-block;
+  margin: 12px;
+  padding: 14px 26px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.buttons a.secondary {
+  background: #0ea5e9;
+}
+
+section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.grid img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+footer {
+  background: #020617;
+  color: #e5e7eb;
+  text-align: center;
+  padding: 50px;
+}
+footer a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="images/logo.png" alt="ruby-libgd" />
+  <h1>Ruby can create images again</h1>
+  <p class="lead">
+    ruby-libgd is a modern native Ruby binding to the GD Graphics Library —
+    a fast, embeddable raster engine for charts, dashboards, GIS, and scientific graphics.
+  </p>
+
+  <div class="buttons">
+    <a href="https://github.com/ggerman/ruby-libgd">GitHub</a>
+    <a class="secondary" href="https://rubygems.org/gems/ruby-libgd">RubyGems</a>
+    <a class="secondary" href="https://rubystacknews.com/2026/01/05/ruby-can-create-images-again/">Read the story</a>
+  </div>
+</header>
+
+<section>
+  <h2>Library Status</h2>
+  <div class="grid">
+    <img src="../examples/charts/images/fruit_chart_with_text.png" />
+    <img src="../examples/charts/images/pie_chart.png" />
+    <img src="../examples/image_processing/images/processed.jpg" />
+    <img src="../examples/charts/images/stem_plot.png" />
+    <img src="../examples/basics/images/vintage.jpg" />
+    <img src="../examples/maps/parana_paracao_route.png" />
+  </div>
+</section>
+
+<section>
+  <h2>Why ruby-libgd?</h2>
+  <p>
+    Ruby lost its native graphics layer. ImageMagick is slow, fragile, and unsuitable
+    for server-side rendering, map tiles, and dashboards.
+  </p>
+  <p>
+    ruby-libgd brings back a true raster engine:
+    no external processes, no shelling out, full pixel control inside Ruby.
+  </p>
+</section>
+
+<section>
+  <h2>Install</h2>
+  <pre><code>gem install ruby-libgd</code></pre>
+  <pre><code>apt install -y libgd-dev pkg-config</code></pre>
+</section>
+
+<section>
+  <h2>Example output</h2>
+  <img src="../examples/images/rubystacknews-banner.png" style="width:100%;border-radius:16px;">
+</section>
+
+<footer>
+  <div style="margin-bottom:30px;">
+    <h3>Connect</h3>
+    <p style="font-size:1.1rem; line-height:2;">
+      📧 <a href="mailto:ggerman@gmail.com">ggerman@gmail.com</a><br>
+      💬 <a href="https://wa.me/5493434192620" target="_blank">WhatsApp</a><br>
+      🌐 <a href="https://rubystacknews.com" target="_blank">RubyStackNews</a><br>
+      🐦 <a href="https://x.com/ruby_stack_news" target="_blank">@RubyStackNews</a><br>
+      💼 <a href="https://www.linkedin.com/in/germ%C3%A1n-silva-56a12622/" target="_blank">Germán Silva on LinkedIn</a>
+    </p>
+  </div>
+
+  <p>
+    ruby-libgd is MIT licensed.  
+    Built by Germán Silva.
+  </p>
+</footer>
+
+</body>
+</html>
+
