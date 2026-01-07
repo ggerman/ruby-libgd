@@ -219,6 +219,52 @@ static VALUE gd_image_copy (
   return Qnil;
 }
 
+static VALUE gd_image_copy_resize(int argc, VALUE *argv, VALUE self) {
+  VALUE src_img;
+  VALUE dst_x, dst_y, src_x, src_y, src_w, src_h, dst_w, dst_h, resample;
+
+  rb_scan_args(argc, argv, "91",
+    &src_img, &dst_x, &dst_y, &src_x, &src_y,
+    &src_w, &src_h, &dst_w, &dst_h,
+    &resample
+  );
+
+  gd_image_wrapper *dst, *src;
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, dst);
+  TypedData_Get_Struct(src_img, gd_image_wrapper, &gd_image_type, src);
+
+  int dx = NUM2INT(dst_x);
+  int dy = NUM2INT(dst_y);
+  int sx = NUM2INT(src_x);
+  int sy = NUM2INT(src_y);
+  int sw = NUM2INT(src_w);
+  int sh = NUM2INT(src_h);
+  int dw = NUM2INT(dst_w);
+  int dh = NUM2INT(dst_h);
+
+  int do_resample = RTEST(resample);
+
+  if (do_resample) {
+    gdImageCopyResampled(
+      dst->img, src->img,
+      dx, dy,
+      sx, sy,
+      dw, dh,
+      sw, sh
+    );
+  } else {
+    gdImageCopyResized(
+      dst->img, src->img,
+      dx, dy,
+      sx, sy,
+      dw, dh,
+      sw, sh
+    );
+  }
+
+  return self;
+}
+
 void gd_define_image(VALUE mGD) {
   VALUE cGDImage = rb_define_class_under(mGD, "Image", rb_cObject);
 
@@ -227,6 +273,7 @@ void gd_define_image(VALUE mGD) {
   rb_define_method(cGDImage, "width",  gd_image_width,  0);
   rb_define_method(cGDImage, "height", gd_image_height, 0);
   rb_define_method(cGDImage, "initialize", gd_image_initialize, -1);
+  rb_define_method(cGDImage, "copy_resize", gd_image_copy_resize, -1);
   rb_define_method(cGDImage, "copy", gd_image_copy, 7);
   rb_define_method(cGDImage, "clone", gd_image_clone, 0);
   rb_define_singleton_method(cGDImage, "open", gd_image_open, 1);

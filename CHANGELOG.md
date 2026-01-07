@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 This project follows semantic versioning.
 ---
 
+## [0.1.7] — 2026-01-07
+
+### Added
+- **High-quality image scaling via `copy_resize`**
+  - New `GD::Image#copy_resize` method for resizing and copying image regions.
+  - Supports both:
+    - `gdImageCopyResized` (fast, nearest-neighbor)
+    - `gdImageCopyResampled` (high-quality resampling)
+
+  ```ruby
+  dst.copy_resize(
+    src,
+    dst_x, dst_y,
+    src_x, src_y,
+    src_w, src_h,
+    dst_w, dst_h,
+    true   # enable high-quality resampling
+  )
+
+
 ## **v0.1.6 — Sepia filter & color-pipeline expansion**
 
 **Release date:** 2026-01-05
