@@ -1,16 +1,22 @@
 # Ruby Libgd
 
 <p align="center">
-  <a href="https://rubystacknews.com">
-    <img src="https://img.shields.io/badge/RubyStackNews-CC342D?style=for-the-badge&logo=ruby&logoColor=white" />
+  <!-- RubyGems -->
+  <a href="https://rubygems.org/gems/libgd-gis">
+    <img src="https://img.shields.io/badge/RubyGems-libgd--gis-CC342D?style=for-the-badge&logo=rubygems&logoColor=white" />
   </a>
-  <a href="https://x.com/ruby_stack_news">
-    <img src="https://img.shields.io/badge/Twitter%20%40RubyStackNews-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
+
+  <!-- GitHub Repo -->
+  <a href="https://github.com/ggerman/libgd-gis">
+    <img src="https://img.shields.io/badge/GitHub-libgd--gis-181717?style=for-the-badge&logo=github&logoColor=white" />
   </a>
-  <a href="https://www.linkedin.com/in/germ%C3%A1n-silva-56a12622/">
-    <img src="https://img.shields.io/badge/Germán%20Silva-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+
+  <!-- Dependency: ruby-libgd -->
+  <a href="https://github.com/ggerman/ruby-libgd">
+    <img src="https://img.shields.io/badge/Depends%20on-ruby--libgd-CC342D?style=for-the-badge&logo=ruby&logoColor=white" />
   </a>
 </p>
+
 
 <p align="right">
   <img src="docs/images/logo.png" width="160" />

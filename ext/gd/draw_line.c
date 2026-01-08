@@ -44,8 +44,8 @@ static VALUE gd_image_line(int argc, VALUE *argv, VALUE self) {
     rb_warn("Line coordinates clipped to image bounds");
   }
 
-  if (TYPE(color) != T_ARRAY || RARRAY_LEN(color) != 3) {
-    rb_raise(rb_eArgError, "color must be [r,g,b]");
+  if (TYPE(color) != T_ARRAY || RARRAY_LEN(color) < 3 || RARRAY_LEN(color) > 4) {
+    rb_raise(rb_eArgError, "color must be [r,g,b] or [r,g,b,a]");
   }
 
   int c = color_to_gd(wrap->img, color);

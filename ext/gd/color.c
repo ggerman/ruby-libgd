@@ -12,12 +12,24 @@ int color_to_gd(gdImagePtr im, VALUE color) {
     if (gdImageTrueColor(im)) {
         if (RARRAY_LEN(color) >= 4) {
             int a = NUM2INT(rb_ary_entry(color, 3));
-            return gdTrueColorAlpha(r,g,b,a);
+
+            if (a < 0) a = 0;
+            if (a > 255) a = 255;
+
+            int gd_a = (a * 127) / 255;
+
+            return gdTrueColorAlpha(r, g, b, gd_a);
         }
         return gdTrueColor(r,g,b);
     }
 
-    return gdImageColorAllocate(im, r,g,b);
+    if (RARRAY_LEN(color) >= 4) {
+        int a = NUM2INT(rb_ary_entry(color, 3));
+        int gd_a = (a * 127) / 255;
+        return gdImageColorAllocateAlpha(im, r, g, b, gd_a);
+    }
+
+    return gdImageColorAllocate(im, r, g, b);
 }
 
 static VALUE gd_color_rgb(VALUE self, VALUE r, VALUE g, VALUE b) {
