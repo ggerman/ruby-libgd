@@ -18,6 +18,8 @@
 
 ## Library Status
 
+![CI](https://github.com/ggerman/libgd-gis/actions/workflows/ci.yml/badge.svg)
+
 | Implemented | Implemented | Coming Next |
 | :--: | :--: | :--: |
 | <img src="./examples/charts/images/fruit_chart_with_text.png" width="250"> | <img src="./examples/charts/images/pie_chart.png" width="250"> | <img src="./examples/maps/parana_paracao_route.png" width="250"> |
