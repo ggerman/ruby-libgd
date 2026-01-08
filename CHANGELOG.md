@@ -4,6 +4,54 @@ All notable changes to this project will be documented in this file.
 This project follows semantic versioning.
 ---
 
+v0.1.8 — RGBA & Alpha Transparency
+Added
+
+RGBA color support via GD::Color.rgba(r, g, b, a) for all drawing operations.
+
+True alpha blending for:
+
+Lines
+
+Shapes
+
+Text rendered via FreeType (gdImageStringFT)
+
+Images now preserve the alpha channel when saved, enabling transparent overlays.
+
+Improved
+
+Internal color conversion now maps Ruby RGBA (0–255) to GD’s alpha scale (0–127) correctly.
+
+Both truecolor and palette images support transparency using gdImageColorAllocateAlpha.
+
+Rendering output now supports layered graphics, allowing semi-transparent primitives to blend correctly.
+
+Fixed
+
+Drawing methods (line, text, etc.) no longer reject RGBA colors.
+
+Alpha values are no longer misinterpreted as fully transparent due to scale mismatch.
+
+Text rendering now respects alpha values instead of being forced opaque.
+
+Why this matters
+
+This release upgrades ruby-libGD from basic raster drawing to a modern compositing engine.
+It enables real-world use cases such as:
+
+Transparent overlays
+
+Heatmaps
+
+GIS layers
+
+Labeling over basemaps
+
+Data visualization pipelines
+
+This is a foundational step toward using ruby-libGD for map rendering, dashboards, and scientific graphics.
+
 ## [0.1.7] — 2026-01-07
 
 ### Added
