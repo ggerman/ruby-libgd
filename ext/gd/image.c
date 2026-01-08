@@ -18,10 +18,14 @@ static VALUE gd_image_initialize(int argc, VALUE *argv, VALUE self) {
   if (w <= 0 || h <= 0)
     rb_raise(rb_eArgError, "width and height must be positive");
 
-  wrap->img = gdImageCreateTrueColor(w, h);
+  wrap->img = gdImageCreateTrueColor(w,h);
+  gdImageSaveAlpha(wrap->img, 1);
+  gdImageAlphaBlending(wrap->img, 0);
+
+  int transparent = gdTrueColorAlpha(0,0,0,127);
+  gdImageFilledRectangle(wrap->img, 0,0,w,h, transparent);
 
   gdImageAlphaBlending(wrap->img, 1);
-  gdImageSaveAlpha(wrap->img, 1);
 
   int t = gdTrueColorAlpha(0,0,0,127);
   gdImageFilledRectangle(wrap->img, 0, 0, w-1, h-1, t);
