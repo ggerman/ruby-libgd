@@ -1,0 +1,56 @@
+name: 🐞 Bug report
+description: Something is wrong with image rendering, filters, or drawing
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve **ruby-libgd** 🚀
+        This library is a native raster engine for Ruby.
+        Please provide a minimal reproducible example so we can fix it fast.
+
+  - type: input
+    id: version
+    attributes:
+      label: ruby-libgd version
+      placeholder: "0.1.9"
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Ruby code to reproduce the problem
+      description: Paste the smallest script that triggers the issue
+      render: ruby
+      placeholder: |
+        require "gd"
+
+        img = GD::Image.new(400, 300)
+        img.rectangle(10,10,200,200, color: [255,0,0])
+        img.save("test.png")
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      placeholder: "A red rectangle should appear at the top left..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+      placeholder: "The rectangle is clipped / missing / wrong color..."
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: "Ubuntu 22.04, macOS, Windows..."

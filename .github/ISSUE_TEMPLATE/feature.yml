@@ -1,0 +1,33 @@
+name: ✨ Feature request
+description: Suggest a new drawing, filter, or image capability
+title: "[FEATURE] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ruby-libgd is growing fast.
+        Tell us what you want to draw, filter, or render next.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      placeholder: "I need to generate thumbnails with rounded corners..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: How would you like the API to look?
+      placeholder: |
+        img.rounded_rectangle(x, y, w, h, radius: 10)
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Use case
+      placeholder: "This would be used in dashboards, map tiles, reports..."
