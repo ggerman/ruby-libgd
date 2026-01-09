@@ -91,16 +91,6 @@ gem install ruby-libgd
 - 🇬🇧 **English**: https://ggerman.github.io/ruby-libgd/en/
 - 🇯🇵 **日本語**: https://ggerman.github.io/ruby-libgd/jp/
 
-### API Reference
-
-- Drawing: https://ggerman.github.io/ruby-libgd/en/drawing/
-- Text: https://ggerman.github.io/ruby-libgd/en/text/
-- Filters: https://ggerman.github.io/ruby-libgd/en/filters/
-- Color: https://ggerman.github.io/ruby-libgd/en/color/
-- I/O: https://ggerman.github.io/ruby-libgd/en/io/
-- Transformations: https://ggerman.github.io/ruby-libgd/en/transform/
-
-
 ---
 
 ## Examples:
