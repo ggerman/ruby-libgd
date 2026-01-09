@@ -36,13 +36,57 @@ ruby-libgd is a modern native Ruby binding to the GD Graphics Library, providing
 
 It enables Ruby to generate images, charts, dashboards, GIS tiles, and scientific graphics without spawning external processes.
 
-## Installation
+## 🐧Installation (Debian / Ubuntu /Dockerfile)
 
 `gem install ruby-libgd`
 
 System dependencies:
 
 `apt install -y libgd-dev pkg-config`
+
+---
+
+## 🍎 macOS (Intel & Apple Silicon)
+
+ruby-libgd is a native extension and depends on libgd, which must be installed via Homebrew.
+
+Install libgd
+
+```bash
+brew install gd
+```
+Verify Homebrew’s install path:
+
+```bash
+brew --prefix gd
+```
+
+Typical values:
+Apple Silicon (**M1 / M2 / M3**): /opt/homebrew
+
+Intel Macs: /usr/local
+
+### Install ruby-libgd
+
+Apple Silicon (**M1 / M2 / M3**)
+
+Homebrew installs libraries into **/opt/homebrew**, which Ruby’s native extension builder does not detect automatically.
+
+## Install using:
+
+```bash
+gem install ruby-libgd -- --with-gd-dir=/opt/homebrew
+```
+
+## Intel macOS
+
+```bash
+gem install ruby-libgd
+```
+
+---
+
+
 
 ## Examples
 
