@@ -1,3 +1,42 @@
+<header>
+  <img src="../images/logo.png" alt="ruby-libgd" />
+  <h1>Ruby は再び画像を生成できる</h1>
+  <p class="lead">
+    ruby-libgd は、GD グラフィックスライブラリを基盤とした
+    Ruby 向けの最新ネイティブバインディングです。
+    チャート、ダッシュボード、GIS、科学可視化のための
+    高速で組み込み可能なラスターエンジンを提供します。
+  </p>
+
+  <div class="buttons">
+    <a href="https://github.com/ggerman/ruby-libgd">GitHub</a>
+    <a class="secondary" href="https://rubygems.org/gems/ruby-libgd">RubyGems</a>
+    <a class="secondary" href="https://rubystacknews.com/2026/01/05/ruby-can-create-images-again/">記事を読む</a>
+  </div>
+</header>
+
+<div class="connect-bar">
+  <h3>連絡先</h3>
+  <div class="connect-links">
+    <a href="mailto:ggerman@gmail.com">📧 メール</a>
+    <a href="https://wa.me/5493434192620" target="_blank">💬 WhatsApp</a>
+    <a href="https://rubystacknews.com" target="_blank">🌐 RubyStackNews</a>
+    <a href="https://x.com/ruby_stack_news" target="_blank">🐦 Twitter</a>
+    <a href="https://www.linkedin.com/in/germ%C3%A1n-silva-56a12622/" target="_blank">💼 LinkedIn</a>
+  </div>
+</div>
+
+<div class="connect-bar">
+  <h3>ドキュメント</h3>
+  <div class="connect-links">
+    <a href="/ruby-libgd/index.html">🇬🇧 English</a>
+    <a href="/ruby-libgd/jp/index.html">🇯🇵 日本語</a>
+    <a href="https://github.com/ggerman/ruby-libgd">📦 GitHub</a>
+    <a href="https://rubygems.org/gems/ruby-libgd">💎 RubyGems</a>
+  </div>
+</div>
+
+
 # ruby-libgd — Ruby向けグラフィックス＆画像処理エンジン
 
 `ruby-libgd` は GD C ライブラリを基盤とした Ruby 用のネイティブ 2D ラスターグラフィックスエンジンです。  
