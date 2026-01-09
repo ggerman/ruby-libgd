@@ -17,15 +17,13 @@
 
 | メソッド | 説明 |
 |--------|-------------|
-| `GD::Image.new` | 新しい TrueColor キャンバスを作成 |
-| `GD::Image.new_true_color` | 新しい TrueColor 画像を作成 |
-| `GD::Image.open` | 画像をディスクから読み込み |
-| `width` | 画像の幅 |
-| `height` | 画像の高さ |
-| `color` | 色を割り当て（RGBA） |
-| `alpha_blending=` | アルファブレンディングの有効 / 無効 |
-| `save_alpha=` | アルファチャンネル保存の有効 / 無効 |
-| `clone` | 画像を複製 |
+| [`GD::Image.new`](io/new.md) | 新しい TrueColor キャンバスを作成 |
+| [`GD::Image.open`](io/load.md) | 画像をディスクから読み込み |
+| [`width`](core/width.md) | 画像の幅 |
+| [`height`](core/height.md) | 画像の高さ |
+| [`color`](core/color.md) | 色を割り当て（RGBA） |
+| [`clone`](transform/clone.md) | 画像を複製 |
+| [`destroy`](core/destroy.md) | メモリを解放 |
 
 ---
 
@@ -33,8 +31,9 @@
 
 | メソッド | 説明 |
 |--------|-------------|
-| `GD::Color.rgb` | RGB 色を作成 |
-| `GD::Color.rgba` | RGBA 色を作成 |
+| [`GD::Color.rgb`](color/rgb.md) | RGB 色を作成 |
+| [`GD::Color.rgba`](color/rgba.md) | RGBA 色を作成 |
+| [`GD::Color`](color/model.md) | カラーモデル |
 
 ---
 
@@ -42,15 +41,15 @@
 
 | メソッド | 説明 |
 |-------|-------------|
-| `line` | 直線を描画 |
-| `rectangle` | 四角形の枠線を描画 |
-| `filled_rectangle` | 塗りつぶし四角形を描画 |
-| `ellipse` | 楕円を描画 |
-| `filled_ellipse` | 塗りつぶし楕円を描画 |
-| `circle` | 線の太さを指定して円を描画 |
-| `filled_circle` | 塗りつぶし円を描画 |
-| `polygon` | 多角形を描画 |
-| `filled_polygon` | 塗りつぶし多角形を描画 |
+| [`line`](drawing/line_ja.md) | 直線を描画 |
+| [`rectangle`](drawing/rectangle_ja.md) | 四角形の枠線を描画 |
+| [`filled_rectangle`](drawing/filled_rectangle_ja.md) | 塗りつぶし四角形 |
+| [`ellipse`](drawing/ellipse_ja.md) | 楕円を描画 |
+| [`filled_ellipse`](drawing/filled_ellipse_ja.md) | 塗りつぶし楕円 |
+| [`circle`](drawing/circle_ja.md) | 円を描画 |
+| [`filled_circle`](drawing/filled_circle_ja.md) | 塗りつぶし円 |
+| [`polygon`](drawing/polygon_ja.md) | 多角形を描画 |
+| [`filled_polygon`](drawing/filled_polygon_ja.md) | 塗りつぶし多角形 |
 
 ---
 
@@ -58,7 +57,7 @@
 
 | メソッド | 説明 |
 |--------|-------------|
-| `text` | UTF-8 TrueType テキストを描画 |
+| [`text`](text/text_ja.md) | UTF-8 TrueType テキストを描画 |
 
 ---
 
@@ -66,12 +65,8 @@
 
 | メソッド | 説明 |
 |--------|-------------|
-| `filter("negate")` | 色を反転 |
-| `filter("grayscale")` | グレースケールに変換 |
-| `filter("brightness", v)` | 明るさを調整 |
-| `filter("contrast", v)` | コントラストを調整 |
-| `filter("colorize", r,g,b,a)` | 色オーバーレイ |
-| `filter("sepia")` | セピア調（ruby-libgd 実装） |
+| [`filter`](filters/filter.md) | 画像フィルタを適用 |
+| [`filter("sepia")`](filters/sepia.md) | セピア調（ruby-libgd 実装） |
 
 ---
 
@@ -79,10 +74,10 @@
 
 | メソッド | 説明 |
 |--------|-------------|
-| `crop` | 新しい画像として切り抜き |
-| `scale` | 新しい画像としてリサイズ |
-| `resize` | `scale` のエイリアス |
-| `clone` | 画像を複製 |
+| [`crop`](transform/crop.md) | 切り抜き |
+| [`scale`](transform/scale.md) | リサイズ |
+| [`resize`](transform/resize.md) | `scale` のエイリアス |
+| [`clone`](transform/clone.md) | 画像を複製 |
 
 ---
 
@@ -90,8 +85,8 @@
 
 | メソッド | 説明 |
 |--------|-------------|
-| `copy` | 別の画像から領域をコピー |
-| `copy_resize` | コピー＋リサイズ（必要に応じてリサンプリング） |
+| [`copy`](composition/copy.md) | 別の画像からコピー |
+| [`copy_resize`](composition/copy_resize.md) | コピー＆リサイズ |
 
 ---
 
@@ -99,6 +94,6 @@
 
 | メソッド | 説明 |
 |--------|-------------|
-| `GD::Image.open` | 画像を読み込み |
-| `save` | PNG / JPEG / WebP で保存 |
-| `to_png` | PNG バイト列としてエンコード |
+| [`GD::Image.open`](io/load.md) | 画像を読み込み |
+| [`save`](io/save.md) | PNG / JPEG / WebP で保存 |
+| [`to_png`](io/to_png.md) | PNG バイト列としてエンコード |

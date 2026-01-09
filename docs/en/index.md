@@ -1,6 +1,6 @@
 # ruby-libgd — Graphics & Image Processing for Ruby
 
-`ruby-libgd` provides a native 2D raster graphics engine for Ruby based on the GD C library.
+`ruby-libgd` provides a native 2D raster graphics engine for Ruby based on the GD C library.  
 It exposes a complete drawing, text, filtering, composition and image I/O API through the `GD::Image` class.
 
 ---
@@ -17,15 +17,13 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |--------|-------------|
-| `GD::Image.new` | Create a new truecolor canvas |
-| `GD::Image.new_true_color` | Create a new truecolor image |
-| `GD::Image.open` | Load an image from disk |
-| `width` | Image width |
-| `height` | Image height |
-| `color` | Allocate a color (RGBA) |
-| `alpha_blending=` | Enable / disable alpha blending |
-| `save_alpha=` | Enable / disable alpha channel saving |
-| `clone` | Duplicate the image |
+| [`GD::Image.new`](io/new.md) | Create a new truecolor canvas |
+| [`GD::Image.open`](io/load.md) | Load an image from disk |
+| [`width`](core/width.md) | Image width |
+| [`height`](core/height.md) | Image height |
+| [`color`](core/color.md) | Allocate a color (RGBA) |
+| [`clone`](transform/clone.md) | Duplicate the image |
+| [`destroy`](core/destroy.md) | Free image memory |
 
 ---
 
@@ -33,8 +31,9 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |--------|-------------|
-| `GD::Color.rgb` | Create an RGB color |
-| `GD::Color.rgba` | Create an RGBA color |
+| [`GD::Color.rgb`](color/rgb.md) | Create an RGB color |
+| [`GD::Color.rgba`](color/rgba.md) | Create an RGBA color |
+| [`GD::Color`](color/model.md) | Color model |
 
 ---
 
@@ -42,15 +41,15 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |-------|-------------|
-| `line` | Draw a straight line |
-| `rectangle` | Draw a rectangle outline |
-| `filled_rectangle` | Draw a filled rectangle |
-| `ellipse` | Draw an ellipse |
-| `filled_ellipse` | Draw a filled ellipse |
-| `circle` | Draw a circle with thickness |
-| `filled_circle` | Draw a filled circle |
-| `polygon` | Draw a polygon |
-| `filled_polygon` | Draw a filled polygon |
+| [`line`](drawing/line.md) | Draw a straight line |
+| [`rectangle`](drawing/rectangle.md) | Draw a rectangle outline |
+| [`filled_rectangle`](drawing/filled_rectangle.md) | Draw a filled rectangle |
+| [`ellipse`](drawing/ellipse.md) | Draw an ellipse |
+| [`filled_ellipse`](drawing/filled_ellipse.md) | Draw a filled ellipse |
+| [`circle`](drawing/circle.md) | Draw a circle |
+| [`filled_circle`](drawing/filled_circle.md) | Draw a filled circle |
+| [`polygon`](drawing/polygon.md) | Draw a polygon |
+| [`filled_polygon`](drawing/filled_polygon.md) | Draw a filled polygon |
 
 ---
 
@@ -58,7 +57,7 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |--------|-------------|
-| `text` | Draw UTF-8 TrueType text |
+| [`text`](text/text.md) | Draw UTF-8 TrueType text |
 
 ---
 
@@ -66,12 +65,8 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |--------|-------------|
-| `filter("negate")` | Invert colors |
-| `filter("grayscale")` | Convert to grayscale |
-| `filter("brightness", v)` | Adjust brightness |
-| `filter("contrast", v)` | Adjust contrast |
-| `filter("colorize", r,g,b,a)` | Color overlay |
-| `filter("sepia")` | Sepia tone (ruby-libgd) |
+| [`filter`](filters/filter.md) | Apply a GD image filter |
+| [`filter("sepia")`](filters/sepia.md) | Native sepia tone (ruby-libgd) |
 
 ---
 
@@ -79,10 +74,10 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |--------|-------------|
-| `crop` | Crop to a new image |
-| `scale` | Resize to a new image |
-| `resize` | Alias for `scale` |
-| `clone` | Duplicate the image |
+| [`crop`](transform/crop.md) | Crop to a new image |
+| [`scale`](transform/scale.md) | Resize to a new image |
+| [`resize`](transform/resize.md) | Alias for scale |
+| [`clone`](transform/clone.md) | Duplicate the image |
 
 ---
 
@@ -90,8 +85,8 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |--------|-------------|
-| `copy` | Copy a region from another image |
-| `copy_resize` | Copy & resize (optionally resampled) |
+| [`copy`](composition/copy.md) | Copy a region from another image |
+| [`copy_resize`](composition/copy_resize.md) | Copy & resize (optionally resampled) |
 
 ---
 
@@ -99,8 +94,7 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 | Method | Description |
 |--------|-------------|
-| `GD::Image.open` | Load an image |
-| `save` | Save to PNG / JPEG / WebP |
-| `to_png` | Encode to PNG and return bytes |
-
-
+| [`GD::Image.new`](io/new.md) | Create a blank image |
+| [`GD::Image.open`](io/load.md) | Load from file |
+| [`save`](io/save.md) | Save to PNG / JPEG / WebP |
+| [`to_png`](io/to_png.md) | Encode to PNG and return bytes |
