@@ -17,7 +17,7 @@ rectangle(x1, y1, x2, y2, color)
 img = GD::Image.new(400,300)
 red = img.color(255,0,0)
 img.rectangle(50,50,200,150,red)
-img.save_png("rect.png")
+img.save("rect.png")
 ```
 
 ## Notes
