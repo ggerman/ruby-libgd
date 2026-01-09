@@ -1,5 +1,5 @@
 <header>
-  <img src="../images/logo.png" alt="ruby-libgd" />
+  <img src="../images/logo.png" height="250" alt="ruby-libgd" />
   <h1>Ruby は再び画像を生成できる</h1>
   <p class="lead">
     ruby-libgd は、GD グラフィックスライブラリを基盤とした
