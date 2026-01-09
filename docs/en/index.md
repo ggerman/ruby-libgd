@@ -1,5 +1,5 @@
 <header>
-  <img src="images/logo.png" alt="ruby-libgd" />
+  <img src="../images/logo.png" height="250" alt="ruby-libgd" />
   <h1>Ruby can create images again</h1>
   <p class="lead">
     ruby-libgd is a modern native Ruby binding to the GD Graphics Library —
