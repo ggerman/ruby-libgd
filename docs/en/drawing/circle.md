@@ -18,7 +18,7 @@ circle(cx, cy, radius, color, thickness: 1)
 img = GD::Image.new(300,300)
 red = img.color(255,0,0)
 img.circle(150,150,60,red, thickness: 3)
-img.save_png("circle.png")
+img.save("circle.png")
 ```
 
 ## Notes

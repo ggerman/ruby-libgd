@@ -18,7 +18,7 @@ ellipse(cx, cy, width, height, color)
 img = GD::Image.new(400,300)
 green = img.color(0,255,0)
 img.ellipse(200,150,100,80,green)
-img.save_png("ellipse.png")
+img.save("ellipse.png")
 ```
 
 ## 補足

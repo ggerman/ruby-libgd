@@ -17,7 +17,7 @@ line(x1, y1, x2, y2, color)
 img = GD::Image.new(400,300)
 blue = img.color(0,0,255)
 img.line(20,20,380,280,blue)
-img.save_png("line.png")
+img.save("line.png")
 ```
 
 ## Notes
