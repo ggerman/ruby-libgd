@@ -1,0 +1,1 @@
+# GD::Image#filled_ellipse（塗りつぶし楕円）

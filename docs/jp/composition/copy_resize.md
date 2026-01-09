@@ -1,0 +1,1 @@
+# GD::Image#copy_resize（リサイズコピー）

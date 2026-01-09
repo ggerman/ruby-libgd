@@ -1,0 +1,1 @@
+# GD::Image#to_png（PNG バイト列）

@@ -1,0 +1,1 @@
+# GD::Image#color（色）

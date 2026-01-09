@@ -1,0 +1,1 @@
+# GD::Image#destroy（解放）

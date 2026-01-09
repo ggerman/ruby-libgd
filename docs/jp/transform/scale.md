@@ -1,0 +1,1 @@
+# GD::Image#scale（拡大縮小）

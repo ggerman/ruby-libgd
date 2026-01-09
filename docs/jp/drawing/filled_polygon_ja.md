@@ -1,0 +1,1 @@
+# GD::Image#filled_polygon（塗りつぶし多角形）

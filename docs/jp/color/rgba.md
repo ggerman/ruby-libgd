@@ -1,0 +1,1 @@
+# GD::Color.rgba（RGBA色）
