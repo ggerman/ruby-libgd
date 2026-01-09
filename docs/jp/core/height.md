@@ -1,0 +1,1 @@
+# GD::Image#height（高さ）

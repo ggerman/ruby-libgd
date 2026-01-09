@@ -1,0 +1,1 @@
+# GD::Image.load（読み込み）

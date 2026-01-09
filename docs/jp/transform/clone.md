@@ -1,0 +1,1 @@
+# GD::Image#clone（複製）

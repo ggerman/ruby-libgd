@@ -1,0 +1,1 @@
+# GD::Image#filled_circle（塗りつぶし円）

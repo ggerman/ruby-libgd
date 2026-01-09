@@ -1,0 +1,1 @@
+# GD::Image#width（幅）

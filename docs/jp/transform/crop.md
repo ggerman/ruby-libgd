@@ -1,0 +1,1 @@
+# GD::Image#crop（切り抜き）
