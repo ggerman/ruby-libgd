@@ -4,7 +4,67 @@ All notable changes to this project will be documented in this file.
 This project follows semantic versioning.
 ---
 
-v0.1.8 — RGBA & Alpha Transparency
+---
+
+## 0.2.0 — January 11, 2026
+
+This release introduces a major upgrade to ruby-libgd’s rendering engine, focused on **truecolor alpha blending and antialiasing**.
+ It marks the transition from basic raster output to **modern, high-quality graphics suitable for GIS, charts, and layered visualizations**.
+
+### ✨ New features
+
+- **Truecolor alpha support**
+  - Colors now accept `[r, g, b, a]` with `a = 0..255`
+  - Correct conversion to GD’s internal alpha range
+  - Proper blending of overlapping shapes, text, and layers
+- **Antialiasing for all drawing primitives**
+  - New `GD::Image#antialias=` API
+  - Smooth edges for:
+    - lines
+    - polygons
+    - ellipses and circles
+    - filled shapes
+    - text
+  - Enables professional-grade rendering quality
+- **Unified color pipeline**
+  - `GD::Color.rgb` and `GD::Color.rgba`
+  - Consistent Ruby-level color representation
+  - Automatic conversion to GD truecolor or palette formats
+
+### 🖼 Rendering improvements
+
+- Clean curved edges and diagonals
+- Correct alpha compositing between layers
+- No more jagged borders when drawing with transparency
+- Significantly improved visual quality for maps and diagrams
+
+### 🧩 API additions
+
+```
+img.antialias = true
+GD::Color.rgb(r, g, b)
+GD::Color.rgba(r, g, b, a)
+```
+
+### 🗺 Impact on libgd-gis
+
+This release provides the rendering foundation required by **libgd-gis**:
+
+- smooth rivers and roads
+- readable labels
+- layered map styling
+- modern GIS-grade output
+
+### ⚠️ Notes
+
+- Alpha values are expressed in Ruby as `0..255`
+- Internally converted to GD’s `0..127` range
+- Existing RGB color code remains fully compatible
+
+---
+
+# v0.1.8 — RGBA & Alpha Transparency
+
 Added
 
 RGBA color support via GD::Color.rgba(r, g, b, a) for all drawing operations.
