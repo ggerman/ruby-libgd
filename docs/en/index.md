@@ -86,6 +86,7 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 | [`filled_circle`](drawing/filled_circle.md) | Draw a filled circle |
 | [`polygon`](drawing/polygon.md) | Draw a polygon |
 | [`filled_polygon`](drawing/filled_polygon.md) | Draw a filled polygon |
+| [antialias](antialiasing.md) | Antialiasing & Alpha Blending |
 
 ---
 

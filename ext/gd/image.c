@@ -270,6 +270,25 @@ static VALUE gd_image_copy_resize(int argc, VALUE *argv, VALUE self) {
   return self;
 }
 
+static VALUE gd_image_antialias(VALUE self, VALUE flag) {
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+
+  if (!wrap->img)
+    rb_raise(rb_eRuntimeError, "image is NULL");
+
+  if (RTEST(flag)) {
+    int aa = gdTrueColorAlpha(255,255,255,0);
+    gdImageSetAntiAliased(wrap->img, aa);
+    gdImageAlphaBlending(wrap->img, 1);
+  } else {
+    gdImageSetAntiAliased(wrap->img, -1);
+  }
+
+  return flag;
+}
+
+
 void gd_define_image(VALUE mGD) {
   VALUE cGDImage = rb_define_class_under(mGD, "Image", rb_cObject);
 
@@ -285,4 +304,7 @@ void gd_define_image(VALUE mGD) {
   rb_define_singleton_method(cGDImage, "new_true_color", gd_image_s_new_true_color, 2);
   rb_define_method(cGDImage, "alpha_blending=", gd_image_alpha_blending, 1);
   rb_define_method(cGDImage, "save_alpha=", gd_image_save_alpha, 1);
+  rb_define_method(cGDImage, "antialias=", gd_image_antialias, 1);
+  rb_define_method(cGDImage, "antialias",  gd_image_antialias, 1);
+
 }

@@ -24,7 +24,7 @@
 | :--: | :--: | :--: |
 | <img src="./examples/charts/images/fruit_chart_with_text.png" width="250"> | <img src="./examples/charts/images/pie_chart.png" width="250"> | <img src="./examples/maps/parana_paracao_route.png" width="250"> |
 | <img src="./examples/image_processing/images/processed.jpg" width="250"> | <img src="./examples/charts/images/stem_plot.png" width="250"> | <img src="./examples/maps/parana_paracao_polygon.png" width="250"> |
-| <img src="./examples/basics/images/vintage.jpg" width="250">  |  |  |
+| <img src="./examples/basics/images/vintage.jpg" width="250">  | <img src="./examples/basics/images/antialias_demo.png" width="250"> |  |
 
 **Note:** The images shown in Table 1, along with the code used to generate them, are available in the `examples/` folder.
 

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "ruby-libgd"
-  s.version     = "0.1.9"
+  s.version     = "0.2.0"
   s.summary     = "Native Ruby bindings for libgd"
   s.description = "High-performance native Ruby bindings to libgd for image generation, drawing, filters, alpha blending, and transformations."
   s.authors     = ["Germán Alberto Giménez Silva"]
