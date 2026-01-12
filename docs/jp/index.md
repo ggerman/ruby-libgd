@@ -89,7 +89,7 @@
 | [`filled_circle`](drawing/filled_circle_ja.md) | 塗りつぶし円 |
 | [`polygon`](drawing/polygon_ja.md) | 多角形を描画 |
 | [`filled_polygon`](drawing/filled_polygon_ja.md) | 塗りつぶし多角形 |
-| [antialias](antialiasing.md) | アンチエイリアスとアルファ合成 |
+| [antialias](drawing/antialiasing.md) | アンチエイリアスとアルファ合成 |
 
 ---
 
