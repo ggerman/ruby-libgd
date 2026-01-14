@@ -98,6 +98,8 @@
 | メソッド | 説明 |
 |--------|-------------|
 | [`text`](text/text_ja.md) | UTF-8 TrueType テキストを描画 |
+| [`text_bbox`](text/text_bbox.md) | TrueType 文字列の実際の描画サイズ（ピクセル単位）を取得 |
+| [`text_ft`](text/text_ft.md) | FreeTypeEx を使って DPI・改行・行間・回転に対応したテキスト描画 |
 
 ---
 
