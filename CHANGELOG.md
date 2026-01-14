@@ -6,6 +6,69 @@ This project follows semantic versioning.
 
 ---
 
+## **ruby-libgd 0.2.2 — Text & Layout Foundations**
+
+This release significantly expands ruby-libgd’s text rendering capabilities while preserving full backward compatibility with the existing `.text` API.
+
+### **New**
+
+**`GD::Image#text_bbox`**
+ Adds support for measuring rendered text using FreeType.
+ Returns the exact pixel width and height of a string for layout, centering, and label placement.
+
+```
+w, h = img.text_bbox("Tokyo", font: "NotoSans.ttf", size: 32)
+```
+
+**`GD::Image#text_ft`**
+ Introduces a high-quality FreeType rendering path via `gdImageStringFTEx`, enabling:
+
+- DPI-aware rendering
+- Multiline text
+- Line spacing control
+- Subpixel hinting
+- Rotation support
+
+```
+img.text_ft(
+  "Tokyo\nShinjuku",
+  x: 100,
+  y: 200,
+  font: "NotoSans.ttf",
+  size: 28,
+  dpi: 144,
+  line_spacing: 1.4
+)
+```
+
+### **Improved**
+
+**Text measurement and layout**
+
+- Text bounding boxes now use the same FreeType engine as rendering, ensuring perfect consistency between measurement and output.
+- Rotation-aware bounding boxes are supported for proper placement of angled labels.
+
+**Foundation for GIS labels, UI, and layout engines**
+
+- These new primitives enable:
+  - Centered and aligned labels
+  - Background boxes
+  - Collision detection
+  - Map overlays
+  - Hi-DPI text for printing and export
+
+### **Compatibility**
+
+- The existing `GD::Image#text` method remains unchanged and fully backward-compatible.
+- All new functionality is additive and does not alter existing behavior.
+
+### **Testing**
+
+- Added deterministic FreeType-based specs using a bundled font fixture.
+- Ensures stable, cross-platform rendering and layout measurements in CI.
+
+---
+
 ## 0.2.0 — January 11, 2026
 
 This release introduces a major upgrade to ruby-libgd’s rendering engine, focused on **truecolor alpha blending and antialiasing**.

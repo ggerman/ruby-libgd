@@ -95,6 +95,8 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 | Method | Description |
 |--------|-------------|
 | [`text`](text/text.md) | Draw UTF-8 TrueType text |
+| [`text_bbox`](text/text_bbox.md) | Measure the rendered size of a TrueType string (width and height in pixels) |
+| [`text_ft`](text/text_ft.md) | Render TrueType text with FreeTypeEx (DPI, multiline, line spacing, rotation) |
 
 ---
 
