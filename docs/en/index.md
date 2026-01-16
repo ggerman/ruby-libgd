@@ -90,6 +90,21 @@ It exposes a complete drawing, text, filtering, composition and image I/O API th
 
 ---
 
+## Animation (GIF)
+
+| Class | Description |
+|------|-------------|
+| `GD::Gif` | Animated GIF encoder |
+
+| Method | Description |
+|--------|-------------|
+| [`GD::Gif.new`](gif/new.md) | Create a new animated GIF |
+| [`add_frame`](gif/add_frame.md) | Add a frame with delay |
+| [`close`](gif/close.md) | Finalize and write the GIF |
+
+---
+
+
 ## Text
 
 | Method | Description |

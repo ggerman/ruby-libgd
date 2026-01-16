@@ -83,6 +83,8 @@ void Init_gd(void) {
   gd_define_transform(cGDImage);
   gd_define_encode(cGDImage);
 
+  gd_define_gif(mGD);
+
   gd_define_color(mGD);
   gd_define_version(mGD);
 }

@@ -36,13 +36,6 @@ static VALUE gd_image_initialize(int argc, VALUE *argv, VALUE self) {
   return self;
 }
 
-static VALUE gd_image_initialize_empty(VALUE self) {
-  gd_image_wrapper *wrap;
-  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
-  wrap->img = NULL;
-  return self;
-}
-
 static VALUE gd_image_initialize_true_color(VALUE self, VALUE width, VALUE height) {
   gd_image_wrapper *wrap;
   TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
@@ -120,21 +113,6 @@ static VALUE gd_image_alloc(VALUE klass) {
   gd_image_wrapper *wrap;
   VALUE obj = TypedData_Make_Struct(klass, gd_image_wrapper, &gd_image_type, wrap);
   wrap->img = NULL;
-  return obj;
-}
-
-static VALUE gd_image_new(VALUE klass, VALUE w, VALUE h) {
-  VALUE obj = rb_class_new_instance(0, NULL, klass);
-  gd_image_wrapper *wrap;
-  TypedData_Get_Struct(obj, gd_image_wrapper, &gd_image_type, wrap);
-
-  int width  = NUM2INT(w);
-  int height = NUM2INT(h);
-  if (width <= 0 || height <= 0)
-    rb_raise(rb_eArgError, "width and height must be positive");
-
-  wrap->img = gdImageCreateTrueColor(width, height);
-  if (!wrap->img) rb_raise(rb_eRuntimeError, "gdImageCreateTrueColor failed");
   return obj;
 }
 
