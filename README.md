@@ -27,8 +27,9 @@
 
 ![CI](https://github.com/ggerman/libgd-gis/actions/workflows/ci.yml/badge.svg)
 
-| Implemented | Implemented | Coming Next |
+| Implemented | Implemented | Implemented |
 | :--: | :--: | :--: |
+| <img src="./docs/images/examples/gif/test_animation.gif" width="250"> | <img src="./docs/images/examples/gif/pulse_animation.gif" width="250"> | <img src="./docs/images/examples/gif/bounce_animation.gif" width="250"> |
 | <img src="./examples/charts/images/fruit_chart_with_text.png" width="250"> | <img src="./examples/charts/images/pie_chart.png" width="250"> | <img src="./examples/maps/parana_paracao_route.png" width="250"> |
 | <img src="./examples/image_processing/images/processed.jpg" width="250"> | <img src="./examples/charts/images/stem_plot.png" width="250"> | <img src="./examples/maps/parana_paracao_polygon.png" width="250"> |
 | <img src="./examples/basics/images/vintage.jpg" width="250">  | <img src="./examples/basics/images/antialias_demo.png" width="250"> | <img src="./docs/images/examples/text/wheel.png" width="250"> |
