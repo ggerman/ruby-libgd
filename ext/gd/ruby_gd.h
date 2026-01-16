@@ -32,6 +32,8 @@ void gd_define_transform(VALUE cGDImage);
 void gd_define_filter(VALUE cGDImage);
 void gd_define_encode(VALUE cGDImage);
 
+void gd_define_gif(VALUE mGD);
+
 /* Color */
 void gd_define_color(VALUE mGD);
 void gd_define_version(VALUE mGD);
