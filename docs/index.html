@@ -2,8 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>ruby-libgd — Native Graphics Engine for Ruby</title>
+<title>Create Images with Ruby — ruby-libgd Dynamic Image Generation</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Create images with Ruby using ruby-libgd. Dynamic image generation in Ruby for PNG, JPEG, charts, maps, and server-side graphics without ImageMagick.">
+
+<meta name="keywords" content="
+create images with Ruby,
+Ruby image generation,
+Ruby dynamic images,
+Ruby GD graphics,
+Ruby create PNG,
+Ruby create JPEG,
+Ruby server-side image generation,
+Ruby graphics library
+">
+
+<link rel="canonical" href="https://ggerman.github.io/ruby-libgd/" />
+
 
 <style>
 body {
@@ -110,11 +126,14 @@ footer a {
 
 <header>
   <img src="images/logo.png" alt="ruby-libgd" />
-  <h1>Ruby can create images again</h1>
+  <h1>Create Images with Ruby</h1>
   <p class="lead">
-    ruby-libgd is a modern native Ruby binding to the GD Graphics Library —
-    a fast, embeddable raster engine for charts, dashboards, GIS, and scientific graphics.
+    ruby-libgd lets developers <strong>create images with Ruby</strong> using
+    the native GD Graphics Library. It enables <strong>dynamic image generation in Ruby</strong>
+    for PNG and JPEG images, charts, maps, dashboards, and server-side rendering
+    without ImageMagick or external processes.
   </p>
+
 
   <div class="buttons">
     <a href="https://github.com/ggerman/ruby-libgd">GitHub</a>
@@ -147,10 +166,39 @@ footer a {
 </div>
 
 <section>
-  <h2>Visual Showcase</h2>
+  <h2>Create Images with Ruby Using ruby-libgd</h2>
+
+  <p>
+    ruby-libgd is a native Ruby graphics library designed to
+    <strong>create images with Ruby</strong>.
+    It provides fast, reliable, and fully in-process
+    <strong>Ruby image generation</strong> using the GD raster engine.
+  </p>
+
+  <p>
+    If you are searching for a way to:
+  </p>
+
+  <ul>
+    <li>Create images with Ruby programmatically</li>
+    <li>Generate PNG and JPEG images in Ruby</li>
+    <li>Build dynamic charts and dashboards with Ruby</li>
+    <li>Perform server-side image generation in Ruby</li>
+    <li>Replace ImageMagick with a native Ruby image solution</li>
+  </ul>
+
+  <p>
+    ruby-libgd is built specifically for <strong>dynamic image generation in Ruby</strong>
+    applications.
+  </p>
+</section>
+
+
+<section>
+  <h2>Examples of Images Created with Ruby</h2>
   <div class="grid">
     <img src="images/examples/fruit_chart_with_text.png">
-    <img src="images/examples/pie_chart.png">
+    <img src="images/examples/pie_chart.png" alt="Pie chart created with Ruby using ruby-libgd">
     <img src="images/examples/stem_plot.png">
     <img src="images/examples/horizontal_bar_chart_640.png">
     <img src="images/examples/world_population.png">
@@ -166,14 +214,20 @@ footer a {
 </section>
 
 <section>
-  <h2>Why ruby-libgd?</h2>
+  <h2>Why Use ruby-libgd for Ruby Image Generation?</h2>
+
   <p>
-    Ruby lost its native graphics layer. ImageMagick is slow, fragile, and unsuitable
-    for server-side rendering, map tiles, and dashboards.
+    Ruby lost its native graphics layer.
+    ImageMagick is slow, fragile, and unsuitable for
+    <strong>server-side image generation in Ruby</strong>.
   </p>
+
   <p>
-    ruby-libgd brings back a true raster engine:
-    no external processes, no shelling out, full pixel control inside Ruby.
+    ruby-libgd restores the ability to
+    <strong>create images with Ruby</strong>
+    using a true raster engine:
+    no shelling out, no background daemons,
+    and full pixel-level control directly from Ruby code.
   </p>
 </section>
 
@@ -184,16 +238,90 @@ footer a {
 </section>
 
 <section>
+  <h2>How to Create Images with Ruby</h2>
+
+  <p>
+    Creating images with Ruby using ruby-libgd is simple and fast.
+    The library allows Ruby applications to generate images dynamically
+    without spawning external processes.
+  </p>
+
+  <pre><code>
+require "gd"
+
+img = GD::Image.new(400,400)
+
+blue  = GD::Color.rgb(0,120,255)
+green = GD::Color.rgb(0,200,120)
+
+img.line(50,50,350,350, blue)
+img.rectangle(50,50,350,350, blue)
+img.filled_circle(200,200,80, green)
+
+poly = [
+  [200,50],
+  [350,200],
+  [200,350],
+  [50,200]
+]
+img.filled_polygon(poly, GD::Color.rgb(240,200,0))
+
+img.save("shapes.png")
+  </code></pre>
+
+  <p>
+    This example demonstrates <strong>how to create images with Ruby</strong>
+    and export them as PNG files.
+  </p>
+</section>
+
+
+<section>
   <h2>Example Render</h2>
   <img src="images/examples/rubystacknews-banner.png" style="width:100%;border-radius:16px;">
 </section>
 
+<section>
+  <h2>Frequently Asked Questions</h2>
+
+  <h3>Can Ruby create images?</h3>
+  <p>
+    Yes. Ruby can create images using ruby-libgd, which provides
+    native image generation for PNG and JPEG files.
+  </p>
+
+  <h3>Is ruby-libgd an alternative to ImageMagick?</h3>
+  <p>
+    Yes. ruby-libgd is a lightweight, native alternative for
+    creating images with Ruby without external dependencies.
+  </p>
+</section>
+
+
 <footer>
   <p>
-    ruby-libgd is MIT licensed.  
+    ruby-libgd is MIT licensed.
     Built by Germán Silva.
   </p>
 </footer>
+
+<!-- Default Statcounter code for Create Images with Ruby
+https://ggerman.github.io/ruby-libgd/ -->
+<script type="text/javascript">
+var sc_project=13201333;
+var sc_invisible=1;
+var sc_security="fdf16343";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - Statcounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/13201333/0/fdf16343/1/"
+alt="Web Analytics Made Easy - Statcounter"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
 
 </body>
 </html>

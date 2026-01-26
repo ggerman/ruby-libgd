@@ -17,6 +17,14 @@
 </p>
 
 
+---
+
+# Create Images with Ruby – Dynamic Image Generation using ruby-libgd
+
+Create images with Ruby using the GD graphics library.
+This project demonstrates dynamic image generation in Ruby,
+allowing developers to programmatically create PNG and JPEG images.
+
 ```
 # ruby-libgd is evolving very fast, so some examples may temporarily stop working
 # Please report issues or ask for help — feedback is very welcome
