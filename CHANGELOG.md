@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.4] – 2026-02-05
+
+### Compatibility
+- Verified compatibility with **Ruby 4.0.1**
+- Native extension compiles successfully on Ruby 4
+- Test suite passes on Ruby 4.0.1
+
+### Notes
+- When building native extensions in Docker with Ruby 4.0.x,
+  the Ruby Docker image may require setting `RUBYARCHHDRDIR`
+  explicitly due to a Ruby 4 header path configuration issue.
+- This does not affect runtime usage once the extension is built.
+
+### Internal
+- No API changes
+- No behavior changes
+
 All notable changes to this project will be documented in this file.  
 This project follows semantic versioning.
 ---

@@ -11,8 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Docker image
+      - name: Build Docker image (Ruby 4.0.1)
         run: docker build -t ruby-libgd-ci .
 
-      - name: Run RSpec
-        run: docker run --rm ruby-libgd-ci
+      - name: Run specs
+        run: |
+          docker run --rm \
+            -e RUBYARCHHDRDIR=/usr/local/include/ruby-4.0.0/x86_64-linux \
+            -v "$PWD:/app" \
+            -w /app \
+            ruby-libgd-ci \
+            bash -lc "
+              bundle install &&
+              cd ext/gd &&
+              ruby extconf.rb &&
+              make &&
+              cd ../.. &&
+              bundle exec rspec
+            "
