@@ -1,23 +1,27 @@
-FROM ruby:3.3
+FROM ruby:4.0.1
 
-RUN apt update && \
-    apt install -y libgd-dev pkg-config build-essential && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt update && apt -y upgrade
+RUN apt install -y \
+  build-essential \
+  libgd-dev \
+  pkg-config \
+  libgd3 \
+  libgd-tools \
+  valgrind
 
-WORKDIR /src
-COPY . .
+RUN printf "prefix=/usr\n\
+exec_prefix=\${prefix}\n\
+libdir=\${exec_prefix}/lib/x86_64-linux-gnu\n\
+includedir=\${prefix}/include\n\
+\n\
+Name: gd\n\
+Description: GD Graphics Library\n\
+Version: 2.3\n\
+Libs: -L\${libdir} -lgd\n\
+Cflags: -I\${includedir}\n" \
+> /usr/lib/x86_64-linux-gnu/pkgconfig/gd.pc
 
-# Build and install ruby-libgd as a real gem
-RUN gem build ruby-libgd.gemspec && \
-    gem install ruby-libgd-*.gem
+RUN rm -rf /var/lib/apt/lists/*
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 
-# Install test dependencies
-RUN gem install rspec chunky_png rake
-
-# Copy specs outside the source tree
-RUN mkdir /test && \
-    cp -r spec /test/spec
-
-WORKDIR /test
-
-CMD ["rspec", "spec"]
+WORKDIR /app
