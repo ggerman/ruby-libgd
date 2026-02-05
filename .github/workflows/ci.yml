@@ -21,5 +21,5 @@ jobs:
             -v "$PWD:/app" \
             -w /app \
             ruby-libgd-ci \
-            bash -lc "bundle install && bundle exec rake compile && bundle exec rspec"
+            bash -lc "bundle install && bundle exec rspec"
 
