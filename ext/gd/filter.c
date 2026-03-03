@@ -84,6 +84,35 @@ static VALUE gd_image_filter(int argc, VALUE *argv, VALUE self) {
   else if (strcmp(name, "sepia") == 0) {
     gd_image_apply_sepia(wrap->img);
   }
+  else if (strcmp(name, "convolve") == 0) {
+
+    Check_Type(arg1, T_ARRAY);
+    if (RARRAY_LEN(arg1) != 3) {
+      rb_raise(rb_eArgError, "kernel must be a 3x3 array");
+    }
+
+    float filter[3][3];
+
+    for (int i = 0; i < 3; i++) {
+      VALUE row = rb_ary_entry(arg1, i);
+      Check_Type(row, T_ARRAY);
+
+      if (RARRAY_LEN(row) != 3) {
+        rb_raise(rb_eArgError, "kernel must be a 3x3 array");
+      }
+
+      for (int j = 0; j < 3; j++) {
+        filter[i][j] = (float)NUM2DBL(rb_ary_entry(row, j));
+      }
+    }
+
+    float divisor = NIL_P(arg2) ? 1.0f : (float)NUM2DBL(arg2);
+    float offset  = NIL_P(arg3) ? 0.0f : (float)NUM2DBL(arg3);
+
+    if (!gdImageConvolution(wrap->img, filter, divisor, offset)) {
+      rb_raise(rb_eRuntimeError, "convolution failed");
+    }
+  }
   else {
     rb_raise(rb_eArgError, "unknown filter");
   }
