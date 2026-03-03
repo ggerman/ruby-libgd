@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.2.5] - 2026-03-03
+
+### Added
+- Added `:convolve` filter support via `gdImageConvolution`.
+- Enables custom 3x3 convolution kernels directly from Ruby.
+- Supports optional `divisor` and `offset` parameters.
+- Allows implementation of advanced filters such as blur, sharpen, edge detection, emboss, and custom effects.
+
+### Technical Notes
+- Convolution operates on truecolor images.
+- Raises `ArgumentError` if kernel is not a valid 3x3 matrix.
+- Raises `RuntimeError` if underlying `gdImageConvolution` fails.
+
+### Example
+
+```ruby
+kernel = [
+  [0, -1, 0],
+  [-1, 5, -1],
+  [0, -1, 0]
+]
+
+img.filter(:convolve, kernel, 1.0, 0.0)
+```
+
+
 ## [0.2.4] – 2026-02-05
 
 ### Compatibility

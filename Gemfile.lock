@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-libgd (0.2.3)
+    ruby-libgd (0.2.5)
 
 GEM
   remote: https://rubygems.org/
