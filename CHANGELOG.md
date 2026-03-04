@@ -1,4 +1,48 @@
 # Changelog
+## v0.3.0
+
+### Added
+- Added support for additional image filters from libgd.
+- Implemented convolution-based filters:
+  - `sobel`
+  - `sharpen`
+  - `laplacian`
+  - `box_blur`
+  - `gaussian_kernel`
+  - `emboss2`
+- Added support for advanced filters:
+  - `colorize`
+  - `scatter_color`
+  - `scatter_ex`
+- Added convolution filter support using `gdImageConvolution`.
+
+### Examples
+Added new example scripts demonstrating filter usage:
+
+- `box_blur.rb`
+- `colorize_rgb_deltas.rb`
+- `colorize_alpha_deltas.rb`
+- `convolve.rb`
+- `emboss2.rb`
+- `gaussian_kernel.rb`
+- `laplacian.rb`
+- `sobel.rb`
+- `sharpen.rb`
+- `scatter_color.rb`
+- `scatter_ex_01.rb`
+- `scatter_ex_02.rb`
+
+Example images used by the scripts are included in `examples/images`.
+
+### Improved
+- Expanded `GD::Image#filter` coverage to include more libgd filters.
+- Improved filter examples and documentation.
+
+```text
+This release expands ruby-libgd filter support and adds several
+examples demonstrating convolution filters, color manipulation,
+and scatter effects.
+```
 
 ## [0.2.5] - 2026-03-03
 
