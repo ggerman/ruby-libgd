@@ -10,7 +10,7 @@ today = Date.today
 today_str = today.strftime("%Y-%m-%d")
 
 events = YAML.safe_load(
-  File.read("events.yml"),
+  File.read("demo/rsn_events_bot/events.yml"),
   permitted_classes: [],
   aliases: false
 )["events"]
