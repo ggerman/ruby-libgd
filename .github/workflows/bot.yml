@@ -17,7 +17,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -30,7 +30,7 @@ jobs:
 
       - run: ruby demo/rsn_events_bot/social_event_image.rb
 
-      - run: demo/rsn_events_bot/ruby post_to_x.rb
+      - run: ruby demo/rsn_events_bot/post_to_x.rb
         env:
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
