@@ -1,0 +1,16 @@
+events:
+  - name: "RubyKaigi 2026"
+    date: "2026-04-22"
+    location: "Hakodate"
+
+  - name: "Rubysur"
+    date: "2026-03-18"
+    location: "Oficinas de Eryx, Bonpland 1953, CABA"
+
+  - name: "Ruby Community Conference Winter Edition 2026"
+    date: "2026-03-13"
+    location: "Kraków, Poland"
+
+  - name: "RBQ Conf 2026"
+    date: "2026-03-26"
+    location: "Austin, TX, United States"
