@@ -39,7 +39,7 @@ font = GD::Fonts.random
 
 # ---- logo ----
 
-logo = GD::Image.open("logotype-dark.png")
+logo = GD::Image.open("demo/rsn_events_bot/logotype-dark.png")
 
 img.copy(
   logo,
