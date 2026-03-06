@@ -16,13 +16,10 @@ Upcoming Ruby community events
 
 #{image_url}
 
-#Ruby #RubyKaigi #RubyCommunity
+#Ruby #RubyKaigi
 TEXT
 
-response = client.post(
-  "tweets",
-  text: tweet
-)
+response = client.post("tweets", { text: tweet })
 
 puts "Tweet posted"
 puts response
