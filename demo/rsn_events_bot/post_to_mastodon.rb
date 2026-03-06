@@ -1,4 +1,4 @@
-require "net/http"
+equire "net/http"
 require "json"
 
 instance = ENV["MASTODON_INSTANCE"]

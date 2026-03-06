@@ -10,7 +10,7 @@ today = Date.today
 today_str = today.strftime("%Y-%m-%d")
 
 events = YAML.safe_load(
-  File.read("events.yml"),
+  File.read("/demo/rsn_events_bot/events.yml"),
   permitted_classes: [],
   aliases: false
 )["events"]
@@ -27,19 +27,19 @@ events.sort_by! { |e| Date.parse(e["date"]) }
 
 # ---- image ----
 
-img = GD::Image.new(WIDTH, HEIGHT)
+img = GD::Image.new_true_color(WIDTH, HEIGHT)
 
-bg    = GD::Color.rgb(12.9, 11, 10.6)
-white = GD::Color.rgb(240,240,240)
-ruby  = GD::Color.rgb(200,0,0)
+bg = GD::Color.rgb(251, 247, 242)
+black = GD::Color.rgba(10, 10, 10, 50)
+ruby  = GD::Color.rgb(200, 0, 0)
 
-img.filled_rectangle(0,0,WIDTH,HEIGHT,bg)
+img.fill(bg)
 
-font = GD::Fonts.random
+font = GD::Fonts.find("FreeSans") || GD::Fonts.random
 
 # ---- logo ----
 
-logo = GD::Image.open("logotype-dark.png")
+logo = GD::Image.open("/demo/rsn_events_bot/logotype-light.png")
 
 img.copy(
   logo,
@@ -59,7 +59,7 @@ img.text(
   y: 60,
   font: font,
   size: 15,
-  color: white
+  color: black
 )
 
 # ---- events layout ----
@@ -90,7 +90,7 @@ events.each do |event|
     y: y,
     font: font,
     size: 12,
-    color: white
+    color: black
   )
 
   y += line_height
@@ -103,10 +103,10 @@ img.text(
   x: WIDTH - 80,
   y: HEIGHT - 20,
   font: font,
-  size: 12,
+  size: 20,
   color: ruby
 )
 
-img.save("rsn_events.png")
+img.save("/demo/rsn_events_bot/rsn_events.png")
 
 puts "Generated rsn_events.png"
