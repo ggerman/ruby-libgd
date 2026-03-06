@@ -37,4 +37,7 @@ jobs:
           git commit -m "update events image" || echo "no changes"
           git push
 
-      - run: ruby demo/rsn_events_bot/post_to_x.rb
+      - run: ruby demo/rsn_events_bot/post_to_mastodon.rb
+        env:
+          MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+          MASTODON_INSTANCE: https://ruby.social
