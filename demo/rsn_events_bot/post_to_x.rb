@@ -7,13 +7,16 @@ client = X::Client.new(
   access_token_secret: ENV["TWITTER_ACCESS_SECRET"]
 )
 
-media = client.post(
-  "media/upload",
-  media: File.open("rsn_events.png")
-)
+# subir imagen
+media = client.upload_media(File.open("demo/rsn_events_bot/rsn_events.png"))
 
+# publicar tweet
 client.post(
   "tweets",
   text: "Upcoming Ruby events from RubyStackNews",
-  media: { media_ids: [media["media_id_string"]] }
+  media: {
+    media_ids: [media["media_id_string"]]
+  }
 )
+
+puts "Tweet published successfully"
