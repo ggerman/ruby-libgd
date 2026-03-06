@@ -1,10 +1,10 @@
-name: RubyStackNews Events Bot
+name: RubyStackNews Bot
 
 on:
-  schedule:
-    - cron: "0 9 * * *"
-  pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   bot:
@@ -13,20 +13,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgd-dev
+      - run: sudo apt-get update && sudo apt-get install -y libgd-dev
 
-      - name: Install gems
-        run: gem install ruby-libgd x
-
-      - run: bundle install
+      - run: gem install ruby-libgd x
 
       - run: ruby demo/rsn_events_bot/social_event_image.rb
 
@@ -34,13 +30,9 @@ jobs:
         run: |
           git config --global user.name "rsn-bot"
           git config --global user.email "bot@rubystacknews.com"
+
           git add demo/rsn_events_bot/rsn_events.png
           git commit -m "update events image" || echo "no changes"
-          git push
+          git push origin HEAD:${{ github.ref_name }}
 
       - run: ruby demo/rsn_events_bot/post_to_x.rb
-        env:
-          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
-          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
-          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
