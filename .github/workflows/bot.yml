@@ -17,6 +17,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
+          
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgd-dev
+
+      - name: Install gems
+        run: gem install ruby-libgd x
 
       - run: bundle install
 
