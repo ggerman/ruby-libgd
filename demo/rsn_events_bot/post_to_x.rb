@@ -1,5 +1,7 @@
 require "x"
 
+image_url = "https://raw.githubusercontent.com/ggerman/ruby-libgd/feature/demo-bot-agenda/demo/rsn_events_bot/rsn_events.png"
+
 client = X::Client.new(
   api_key: ENV["TWITTER_API_KEY"],
   api_key_secret: ENV["TWITTER_API_SECRET"],
@@ -7,16 +9,20 @@ client = X::Client.new(
   access_token_secret: ENV["TWITTER_ACCESS_SECRET"]
 )
 
-# subir imagen
-media = client.upload_media(File.open("demo/rsn_events_bot/rsn_events.png"))
+tweet = <<~TEXT
+Today in Ruby
 
-# publicar tweet
-client.post(
+Upcoming Ruby community events
+
+#{image_url}
+
+#Ruby #RubyKaigi #RubyCommunity
+TEXT
+
+response = client.post(
   "tweets",
-  text: "Upcoming Ruby events from RubyStackNews",
-  media: {
-    media_ids: [media["media_id_string"]]
-  }
+  text: tweet
 )
 
-puts "Tweet published successfully"
+puts "Tweet posted"
+puts response

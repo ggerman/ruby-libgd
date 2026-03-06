@@ -30,6 +30,14 @@ jobs:
 
       - run: ruby demo/rsn_events_bot/social_event_image.rb
 
+      - name: Commit image
+        run: |
+          git config --global user.name "rsn-bot"
+          git config --global user.email "bot@rubystacknews.com"
+          git add demo/rsn_events_bot/rsn_events.png
+          git commit -m "update events image" || echo "no changes"
+          git push
+
       - run: ruby demo/rsn_events_bot/post_to_x.rb
         env:
           TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
