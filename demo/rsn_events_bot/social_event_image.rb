@@ -10,7 +10,7 @@ today = Date.today
 today_str = today.strftime("%Y-%m-%d")
 
 events = YAML.safe_load(
-  File.read("/demo/rsn_events_bot/events.yml"),
+  File.read("events.yml"),
   permitted_classes: [],
   aliases: false
 )["events"]
@@ -39,7 +39,7 @@ font = GD::Fonts.find("FreeSans") || GD::Fonts.random
 
 # ---- logo ----
 
-logo = GD::Image.open("/demo/rsn_events_bot/logotype-light.png")
+logo = GD::Image.open("logotype-light.png")
 
 img.copy(
   logo,
@@ -107,6 +107,6 @@ img.text(
   color: ruby
 )
 
-img.save("/demo/rsn_events_bot/rsn_events.png")
+img.save("rsn_events.png")
 
 puts "Generated rsn_events.png"
