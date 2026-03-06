@@ -3,7 +3,9 @@ name: RubyStackNews Bot
 on:
   pull_request:
   workflow_dispatch:
-
+  schedule:
+    - cron: "0 9 * * *"
+    
 permissions:
   contents: write
 
