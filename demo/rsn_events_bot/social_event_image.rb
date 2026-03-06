@@ -3,14 +3,14 @@ require "yaml"
 require "date"
 require_relative "fonts"
 
-WIDTH  = 1200
+WIDTH  = 800
 HEIGHT = 630
 
 today = Date.today
 today_str = today.strftime("%Y-%m-%d")
 
 events = YAML.safe_load(
-  File.read("demo/rsn_events_bot/events.yml"),
+  File.read("events.yml"),
   permitted_classes: [],
   aliases: false
 )["events"]
@@ -39,7 +39,7 @@ font = GD::Fonts.random
 
 # ---- logo ----
 
-logo = GD::Image.open("demo/rsn_events_bot/logotype-dark.png")
+logo = GD::Image.open("logotype-dark.png")
 
 img.copy(
   logo,
@@ -73,7 +73,7 @@ event_count = 1 if event_count == 0
 
 line_height = available_height / event_count
 
-line_height = 18 if line_height > 18
+line_height = 25 if line_height > 25
 
 y = start_y
 

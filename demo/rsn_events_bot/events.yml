@@ -1,8 +1,4 @@
 events:
-  - name: "RubyKaigi 2026"
-    date: "2026-04-22"
-    location: "Hakodate"
-
   - name: "Rubysur"
     date: "2026-03-18"
     location: "Oficinas de Eryx, Bonpland 1953, CABA"
@@ -14,3 +10,19 @@ events:
   - name: "RBQ Conf 2026"
     date: "2026-03-26"
     location: "Austin, TX, United States"
+
+  - name: "Tropical on Rails 2026"
+    date: "2026-04-09"
+    location: "São Paulo, SP, Brazil"
+
+  - name: "wroclove.rb 2026"
+    date: "2026-04-17"
+    location: "Wrocław, Poland"
+
+  - name: "RubyKaigi 2026"
+    date: "2026-04-22"
+    location: "Hokkaido, Japan"
+
+  - name: "Haggis Ruby 2026"
+    date: "2026-04-23"
+    location: "Glasgow, Scotland, United Kingdom"
