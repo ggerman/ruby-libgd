@@ -1,4 +1,5 @@
 require "x"
+require "json"
 
 image_url = "https://raw.githubusercontent.com/ggerman/ruby-libgd/feature/demo-bot-agenda/demo/rsn_events_bot/rsn_events.png"
 
@@ -19,7 +20,10 @@ Upcoming Ruby community events
 #Ruby #RubyKaigi
 TEXT
 
-response = client.post("tweets", { text: tweet })
+response = client.post(
+  "tweets",
+  { text: tweet }.to_json
+)
 
 puts "Tweet posted"
 puts response
