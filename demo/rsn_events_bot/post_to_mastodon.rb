@@ -4,32 +4,49 @@ require "json"
 instance = ENV["MASTODON_INSTANCE"]
 token    = ENV["MASTODON_TOKEN"]
 
-image = "demo/rsn_events_bot/rsn_events.png"
+image_path = "demo/rsn_events_bot/rsn_events.png"
 
-# subir media
+abort "Image not found" unless File.exist?(image_path)
+
+# ---- upload media ----
+
 uri = URI("#{instance}/api/v2/media")
 
 req = Net::HTTP::Post.new(uri)
 req["Authorization"] = "Bearer #{token}"
 
-form = [["file", File.open(image)]]
-req.set_form form, "multipart/form-data"
+form_data = [
+  ["file", File.open(image_path)]
+]
 
-res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+req.set_form form_data, "multipart/form-data"
 
-media_id = JSON.parse(res.body)["id"]
+res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(req)
+end
 
-# publicar status
+media = JSON.parse(res.body)
+
+puts "Media upload response:"
+puts media
+
+media_id = media["id"]
+
+# ---- create status ----
+
 uri = URI("#{instance}/api/v1/statuses")
 
 req = Net::HTTP::Post.new(uri)
 req["Authorization"] = "Bearer #{token}"
 
-req.set_form_data({
-  status: "Today in Ruby\n\nUpcoming Ruby events\n\n#Ruby #RubyKaigi",
-  media_ids: [media_id]
-})
+req.set_form_data(
+  "status" => "Today in Ruby\n\nUpcoming Ruby events\n\n#Ruby #RubyKaigi",
+  "media_ids[]" => media_id
+)
 
-res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(req)
+end
 
+puts "Status response:"
 puts res.body
