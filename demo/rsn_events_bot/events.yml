@@ -1,28 +1,105 @@
 events:
+
+  - name: Ruby Community Conference Winter Edition 2026
+    date: 2026-03-13
+    location: Kraków, Poland
+
   - name: "Rubysur"
     date: "2026-03-18"
     location: "Oficinas de Eryx, Bonpland 1953, CABA"
 
-  - name: "Ruby Community Conference Winter Edition 2026"
-    date: "2026-03-13"
-    location: "Kraków, Poland"
+  - name: NantesRb Meetup
+    date: 2026-03-24
+    location: Nantes, France
 
-  - name: "RBQ Conf 2026"
-    date: "2026-03-26"
-    location: "Austin, TX, United States"
+  - name: RBQ Conf 2026
+    date: 2026-03-26
+    location: Austin, TX, United States
 
-  - name: "Tropical on Rails 2026"
-    date: "2026-04-09"
-    location: "São Paulo, SP, Brazil"
+  - name: Tropical on Rails 2026
+    date: 2026-04-09
+    location: São Paulo, SP, Brazil
 
-  - name: "wroclove.rb 2026"
-    date: "2026-04-17"
-    location: "Wrocław, Poland"
+  - name: wroclove.rb 2026
+    date: 2026-04-17
+    location: Wrocław, Poland
 
-  - name: "RubyKaigi 2026"
-    date: "2026-04-22"
-    location: "Hokkaido, Japan"
+  - name: RubyKaigi 2026
+    date: 2026-04-22
+    location: Hakodate, Hokkaido, Japan
 
-  - name: "Haggis Ruby 2026"
-    date: "2026-04-23"
-    location: "Glasgow, Scotland, United Kingdom"
+  - name: Haggis Ruby 2026
+    date: 2026-04-23
+    location: Glasgow, Scotland, United Kingdom
+
+  - name: Blue Ridge Ruby 2026
+    date: 2026-04-30
+    location: Asheville, NC, United States
+
+  - name: Rubycon 2026
+    date: 2026-05-08
+    location: Rimini, Emilia-Romagna, Italy
+
+  - name: Balkan Ruby 2026
+    date: 2026-05-15
+    location: Sofia, Bulgaria
+
+  - name: RubyConf Austria 2026
+    date: 2026-05-29
+    location: Vienna, Austria
+
+  - name: Sekigahara RubyKaigi 01
+    date: 2026-05-30
+    location: Sekigahara, Gifu, Japan
+
+  - name: Matsue RubyKaigi 12
+    date: 2026-06-06
+    location: Matsue, Shimane, Japan
+
+  - name: Blastoff Rails 2026
+    date: 2026-06-11
+    location: Albuquerque, NM, United States
+
+  - name: Baltic Ruby 2026
+    date: 2026-06-12
+    location: Hamburg, Germany
+
+  - name: Brighton Ruby 2026
+    date: 2026-06-25
+    location: Brighton, England, United Kingdom
+
+  - name: RubyConf 2026
+    date: 2026-07-14
+    location: Las Vegas, NV, United States
+
+  - name: RubyConf Africa 2026
+    date: 2026-08-21
+    location: Nairobi, Kenya
+
+  - name: Rails Camp West 2026
+    date: 2026-09-07
+    location: Otis, OR, United States
+
+  - name: EuRuKo 2026
+    date: 2026-09-16
+    location: Brno, Czechia
+
+  - name: Rails at Scale Summit 2026
+    date: 2026-09-22
+    location: Austin, TX, United States
+
+  - name: Rails World 2026
+    date: 2026-09-23
+    location: Austin, TX, United States
+
+  - name: tiny ruby #{conf} 2026
+    date: 2026-10-01
+    location: Helsinki, Finland
+
+  - name: Kaigi on Rails 2026
+    date: 2026-10-16
+    location: Shibuya, Tokyo, Japan
+
+  - name: Helvetic Ruby 2026
+    date: 2026-11-19
+    location: Zurich, Switzerland
