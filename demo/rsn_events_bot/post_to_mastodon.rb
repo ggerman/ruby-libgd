@@ -40,7 +40,7 @@ req = Net::HTTP::Post.new(uri)
 req["Authorization"] = "Bearer #{token}"
 
 req.set_form_data(
-  "status" => "📅 Upcoming Ruby events in the community\n\nFrom meetups to major conferences like RubyKaigi, here are some of the next gatherings around the world.\n\nThe Ruby ecosystem is alive and constantly evolving.\n\nWhat Ruby event are you planning to attend this year?\n\n#Ruby #RubyOnRails",
+  "status" => "📅 Upcoming Ruby events in the community\n\nFrom local meetups to major conferences like RubyKaigi, here are some of the next Ruby gatherings around the world.\n\n🤖 This image is generated automatically by RubyEventsBot using ruby-libgd.\nEvery 7 days the bot publishes a snapshot of upcoming Ruby conferences and meetups.\n\nSource:\nhttps://github.com/ggerman/ruby-libgd\n\nShare:\nX → https://twitter.com/intent/tweet?url=https://ruby.social/@gsgermanok/116183832101126893\nLinkedIn → https://www.linkedin.com/sharing/share-offsite/?url=https://ruby.social/@gsgermanok/116183832101126893\n\nWhat Ruby event are you planning to attend this year?\n\n#Ruby #RubyOnRails #RubyCommunity",
   "media_ids[]" => media_id
 )
 

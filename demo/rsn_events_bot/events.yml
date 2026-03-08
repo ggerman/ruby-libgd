@@ -3,6 +3,10 @@ events:
   - name: "Ruby Community Conference Winter Edition 2026"
     date: "2026-03-13"
     location: "Kraków, Poland"
+    
+  - name: "Rubysur"
+    date: "2026-03-18"
+    location: "Oficinas de Eryx, Bonpland 1953, CABA"
 
   - name: "NantesRb Meetup"
     date: "2026-03-24"
