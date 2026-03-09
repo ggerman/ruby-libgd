@@ -3,8 +3,6 @@ require "yaml"
 require "date"
 require_relative "fonts"
 
-require 'pry'
-
 WIDTH  = 1200
 HEIGHT = 630
 
