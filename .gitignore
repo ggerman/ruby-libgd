@@ -3,3 +3,4 @@
 /ext/gd/*.o
 /ext/gd/*.so
 /ext/gd/*.bundle
+demo/rsn_events_bot/rsn_events.png
