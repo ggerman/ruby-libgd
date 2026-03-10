@@ -1,54 +1,43 @@
 require "net/http"
 require "json"
 
-instance = ENV["MASTODON_INSTANCE"]
-token    = ENV["MASTODON_TOKEN"]
+module Publishers
+  class Mastodon
+    def post(text, image_path)
+      instance = ENV["MASTODON_INSTANCE"]
+      token    = ENV["MASTODON_TOKEN"]
 
-return false unless instance && token
+      return unless instance && token
 
-image_path = "demo/rsn_events_bot/rsn_events.png"
+      abort "Image not found" unless File.exist?(image_path)
 
-abort "Image not found" unless File.exist?(image_path)
+      uri = URI("#{instance}/api/v1/media")
 
-# ---- upload media ----
+      req = Net::HTTP::Post.new(uri)
+      req["Authorization"] = "Bearer #{token}"
 
-uri = URI("#{instance}/api/v1/media")
+      form_data = [
+        ["file", File.open(image_path), { filename: "rsn_events.png" }]
+      ]
 
-req = Net::HTTP::Post.new(uri)
-req["Authorization"] = "Bearer #{token}"
+      req.set_form form_data, "multipart/form-data"
 
-form_data = [
-  ["file", File.open(image_path), { filename: "rsn_events.png" }]
-]
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
 
-req.set_form form_data, "multipart/form-data"
+      media = JSON.parse(res.body)
+      media_id = media["id"]
 
-res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-  http.request(req)
+      uri = URI("#{instance}/api/v1/statuses")
+
+      req = Net::HTTP::Post.new(uri)
+      req["Authorization"] = "Bearer #{token}"
+
+      req.set_form_data(
+        "status" => text,
+        "media_ids[]" => media_id
+      )
+
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+    end
+  end
 end
-
-abort "Upload failed: #{res.body}" unless res.code.to_i == 200
-
-media = JSON.parse(res.body)
-media_id = media["id"]
-
-puts "Uploaded media id: #{media_id}"
-
-# ---- create status ----
-
-uri = URI("#{instance}/api/v1/statuses")
-
-req = Net::HTTP::Post.new(uri)
-req["Authorization"] = "Bearer #{token}"
-
-req.set_form_data(
-  "status" => "📅 Upcoming Ruby events around the world\n\nFrom local meetups to conferences like RubyKaigi, here are some of the next Ruby gatherings in the community.\n\n🤖 Generated automatically by RubyEventsBot using ruby-libgd.\nUpdated every 7 days.\n\nSource:\nhttps://github.com/ggerman/ruby-libgd\n\nWhat Ruby event are you planning to attend this year?\n\n#Ruby #RubyOnRails #RubyCommunity",
-  "media_ids[]" => media_id
-)
-
-res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-  http.request(req)
-end
-
-puts "Status response:"
-puts res.body
