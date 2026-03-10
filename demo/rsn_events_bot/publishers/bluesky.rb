@@ -5,9 +5,6 @@ require "time"
 BSKY_USER = ENV["BSKY_USER"]
 BSKY_PASS = ENV["BSKY_PASS"]
 
-abort "Missing BSKY_USER" unless BSKY_USER
-abort "Missing BSKY_PASS" unless BSKY_PASS
-
 return false unless identifier BSKY_USER && BSKY_PASS
 
 TEXT = <<~TEXT
