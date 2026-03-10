@@ -10,13 +10,13 @@ abort "Image not found" unless File.exist?(image_path)
 
 # ---- upload media ----
 
-uri = URI("#{instance}/api/v2/media")
+uri = URI("#{instance}/api/v1/media")
 
 req = Net::HTTP::Post.new(uri)
 req["Authorization"] = "Bearer #{token}"
 
 form_data = [
-  ["file", File.open(image_path)]
+  ["file", File.open(image_path), { filename: "rsn_events.png" }]
 ]
 
 req.set_form form_data, "multipart/form-data"
@@ -25,12 +25,12 @@ res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
   http.request(req)
 end
 
+abort "Upload failed: #{res.body}" unless res.code.to_i == 200
+
 media = JSON.parse(res.body)
-
-puts "Media upload response:"
-puts media
-
 media_id = media["id"]
+
+puts "Uploaded media id: #{media_id}"
 
 # ---- create status ----
 
