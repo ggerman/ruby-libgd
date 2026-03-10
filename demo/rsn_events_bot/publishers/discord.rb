@@ -18,9 +18,11 @@ module Publishers
 
       req.set_form form, "multipart/form-data"
 
-      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
         http.request(req)
       end
+
+     return res.code.to_i == 200
     end
   end
 end

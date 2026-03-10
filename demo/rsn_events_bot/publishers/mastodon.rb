@@ -37,7 +37,8 @@ module Publishers
         "media_ids[]" => media_id
       )
 
-      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+      return res.code.to_i == 200
     end
   end
 end

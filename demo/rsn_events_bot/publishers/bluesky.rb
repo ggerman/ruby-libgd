@@ -2,85 +2,73 @@ require "net/http"
 require "json"
 require "time"
 
-BSKY_USER = ENV["BSKY_USER"]
-BSKY_PASS = ENV["BSKY_PASS"]
+module Publishers
+  class Bluesky
+    def post(text, _image)
+      user = ENV["BSKY_USER"]
+      pass = ENV["BSKY_PASS"]
 
-exit unless BSKY_USER && BSKY_PASS
+      return unless user && pass
 
-TEXT = <<~TEXT
-📅 Upcoming Ruby events around the world
+      # -------------------------
+      # login
+      # -------------------------
 
-From local meetups to conferences like RubyKaigi, here are some of the next Ruby gatherings in the community.
+      login_uri = URI("https://bsky.social/xrpc/com.atproto.server.createSession")
 
-🤖 Generated automatically using ruby-libgd.
+      login_body = {
+        identifier: user,
+        password: pass
+      }
 
-Source:
-https://github.com/ggerman/ruby-libgd
+      login_res = http_post(login_uri, login_body, {
+        "Content-Type" => "application/json"
+      })
 
-#Ruby #RubyOnRails #RubyCommunity
-TEXT
+      return false unless login_res.code.to_i == 200
 
+      session = JSON.parse(login_res.body)
 
-def http_post(uri, body, headers = {})
-  req = Net::HTTP::Post.new(uri)
+      access_token = session["accessJwt"]
+      did = session["did"]
 
-  headers.each { |k, v| req[k] = v }
+      # -------------------------
+      # create post
+      # -------------------------
 
-  req.body = body.to_json
+      post_uri = URI("https://bsky.social/xrpc/com.atproto.repo.createRecord")
 
-  Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-    http.request(req)
+      post_body = {
+        repo: did,
+        collection: "app.bsky.feed.post",
+        record: {
+          text: text,
+          createdAt: Time.now.utc.iso8601
+        }
+      }
+
+      post_res = http_post(post_uri, post_body, {
+        "Authorization" => "Bearer #{access_token}",
+        "Content-Type" => "application/json"
+      })
+
+      post_res.code.to_i == 200
+    end
+
+    private
+
+    def http_post(uri, body, headers = {})
+      req = Net::HTTP::Post.new(uri)
+
+      headers.each { |k, v| req[k] = v }
+
+      req.body = body.to_json
+
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        http.request(req)
+      end
+
+      return res.code.to_i == 200
+    end
   end
 end
-
-
-# -------------------------
-# login
-# -------------------------
-
-login_uri = URI("https://bsky.social/xrpc/com.atproto.server.createSession")
-
-login_body = {
-  identifier: BSKY_USER,
-  password: BSKY_PASS
-}
-
-login_headers = {
-  "Content-Type" => "application/json"
-}
-
-login_res = http_post(login_uri, login_body, login_headers)
-
-abort "Login failed: #{login_res.body}" unless login_res.code.to_i == 200
-
-session = JSON.parse(login_res.body)
-
-access_token = session["accessJwt"]
-did = session["did"]
-
-puts "Logged in as #{did}"
-
-# -------------------------
-# create post
-# -------------------------
-
-post_uri = URI("https://bsky.social/xrpc/com.atproto.repo.createRecord")
-
-post_body = {
-  repo: did,
-  collection: "app.bsky.feed.post",
-  record: {
-    text: TEXT,
-    createdAt: Time.now.utc.iso8601
-  }
-}
-
-post_headers = {
-  "Authorization" => "Bearer #{access_token}",
-  "Content-Type" => "application/json"
-}
-
-post_res = http_post(post_uri, post_body, post_headers)
-
-puts "Post response:"
-puts post_res.body
