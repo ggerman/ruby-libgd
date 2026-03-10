@@ -5,7 +5,7 @@ require "time"
 BSKY_USER = ENV["BSKY_USER"]
 BSKY_PASS = ENV["BSKY_PASS"]
 
-return false unless identifier BSKY_USER && BSKY_PASS
+return false unless BSKY_USER && BSKY_PASS
 
 TEXT = <<~TEXT
 📅 Upcoming Ruby events around the world
