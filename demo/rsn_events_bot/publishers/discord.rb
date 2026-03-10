@@ -6,7 +6,7 @@ module Publishers
     def post(text, image_path)
       webhook = ENV["DISCORD_WEBHOOK"]
 
-      return false unless webhook
+      exit unless webhook
 
       uri = URI(webhook)
       req = Net::HTTP::Post.new(uri)

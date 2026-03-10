@@ -7,7 +7,7 @@ module Publishers
       instance = ENV["MASTODON_INSTANCE"]
       token    = ENV["MASTODON_TOKEN"]
 
-      return unless instance && token
+      exit unless instance && token
 
       abort "Image not found" unless File.exist?(image_path)
 

@@ -14,3 +14,5 @@ publishers = [
 publishers.each do |publisher|
   puts publisher.post(message, image) ? "x" : "."
 end
+
+puts "Publishing finished"
