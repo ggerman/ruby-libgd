@@ -4,6 +4,8 @@ require "json"
 instance = ENV["MASTODON_INSTANCE"]
 token    = ENV["MASTODON_TOKEN"]
 
+return false unless instance && token
+
 image_path = "demo/rsn_events_bot/rsn_events.png"
 
 abort "Image not found" unless File.exist?(image_path)

@@ -6,11 +6,11 @@ message = "Ruby events this week 🧵"
 image   = "demo/rsn_events_bot/rsn_events.png"
 
 publishers = [
-  Publishers::Mastodon.new
-#  Publishers::Bluesky.new,
-#  Publishers::Discord.new
+  Publishers::Mastodon.new,
+  Publishers::Bluesky.new,
+  Publishers::Discord.new
 ]
 
 publishers.each do |publisher|
-  publisher.post(message, image)
+  puts publisher.post(message, image) ? "x" : "."
 end
