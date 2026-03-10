@@ -25,7 +25,7 @@ jobs:
 
       - run: sudo apt-get update && sudo apt-get install -y libgd-dev
 
-      - run: gem install ruby-libgd atproto
+      - run: gem install ruby-libgd
 
       - run: ruby demo/rsn_events_bot/social_event_image.rb
 
