@@ -155,4 +155,4 @@ plot.add("sin(x)").add("cos(x)").add("x**2 + y**2 - 9", type: :implicit)
 
 - Gem: [rubygems.org/gems/ruby-libgd](https://rubygems.org/gems/ruby-libgd)
 - Source: [github.com/ggerman/ruby-libgd](https://github.com/ggerman/ruby-libgd)
-- Article: [RubyStackNews](https://rubystacknews.com)
+- Article: [RubyStackNews](https://rubystacknews.com/2026/03/13/plotting-mathematical-functions-in-ruby-inside-jupyter/)
