@@ -77,10 +77,9 @@ CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", \
 
 | File | Description |
 |------|-------------|
-| `01_trig_functions.ipynb` | `sin(x)`, `cos(x)`, `tan(x)` with discontinuity detection |
-| `02_logarithms_roots.ipynb` | `log(x)`, `log10(x)`, `log2(x)`, `sqrt(x)`, `cbrt(x)` |
-| `03_implicit_circles_ellipses.ipynb` | `x²+y²=r²`, ellipses, shifted circles |
-| `04_polynomial.ipynb` | `(x+56)³` and other polynomial examples |
+| `functions.ipynb` | `sin(x)`, `cos(x)`, `tan(x)` with discontinuity detection |
+| `gradient.ipynb` | Gradient |
+| `set_pixel.ipynb` | Set Pixels |
 
 ---
 
