@@ -38,6 +38,11 @@ module Publishers
       )
 
       res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+      
+      puts "############################"
+      puts res
+      puts "############################"
+
       return res.code.to_i == 200
     end
   end
