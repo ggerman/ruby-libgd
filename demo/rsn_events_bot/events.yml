@@ -68,9 +68,17 @@ events:
     date: "2026-06-25"
     location: "Brighton, England, United Kingdom"
 
+  - name: "Tokyo RubyKaigi 13"
+    date: "2026-06-27"
+    location: "Tokyo, Japan"
+
   - name: "RubyConf 2026"
     date: "2026-07-14"
     location: "Las Vegas, NV, United States"
+
+  - name: "Kansai RubyKaigi 09"
+    date: "2026-07-18"
+    location: "Otsu, Shiga, Japan"
 
   - name: "RubyConf Africa 2026"
     date: "2026-08-21"
@@ -83,6 +91,10 @@ events:
   - name: "EuRuKo 2026"
     date: "2026-09-16"
     location: "Brno, Czechia"
+
+  - name: "Nagoya RubyKaigi 05"
+    date: "2026-09-19"
+    location: "Nagoya, Aichi, Japan"
 
   - name: "Rails at Scale Summit 2026"
     date: "2026-09-22"
