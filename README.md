@@ -19,6 +19,9 @@
 
 ---
 
+Germán Alberto Giménez Silva | Remote | 🟢 Open to work
+
+---
 # Create Images with Ruby – Dynamic Image Generation using ruby-libgd
 
 Create images with Ruby using the GD graphics library.
