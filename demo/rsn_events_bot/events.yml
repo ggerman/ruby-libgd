@@ -24,6 +24,10 @@ events:
     date: "2026-04-17"
     location: "Wrocław, Poland"
 
+  - name: "RUBY SUR: Abril Virtual!"
+    date: "2026-04-20"
+    location: "Virtual, Spanish"
+
   - name: "RubyKaigi 2026"
     date: "2026-04-22"
     location: "Hakodate, Hokkaido, Japan"
