@@ -10,7 +10,7 @@ blue  = GD::Color.rgb(40,90,220)
 green = GD::Color.rgb(40,180,80)
 
 # Fondo
-img.filled_rectangle(0,0,SIZE,SIZE, white)
+img.fill(0,0,SIZE,SIZE, white)
 
 # Círculo fino (por defecto thickness = 1)
 img.circle(200,200,150, red)
