@@ -48,45 +48,249 @@ events:
     date: "2026-05-15"
     location: "Sofia, Bulgaria"
 
+  - name: "Monthly Meetup (Online)"
+    date: "2026-05-20"
+    location: "Online"
+
+  - name: "Online: Monthly Meeting (Ruby meetup)"
+    date: "2026-05-20"
+    location: "Online"
+
+  - name: "Monthly meeting: AI Fluency: Building Shared Taste in your Product Team"
+    date: "2026-05-20"
+    location: "Online"
+
+  - name: "高雄 Rails Meetup"
+    date: "2026-05-20"
+    location: "Kaohsiung, Taiwan, Asia"
+
+  - name: "York Ruby - Monthly Meeting"
+    date: "2026-05-19"
+    location: "York, United Kingdom, Europe"
+
+  - name: "Miami Ruby Brigade"
+    date: "2026-05-18"
+    location: "Coral Gables, Florida, United States"
+
+  - name: "Columbus Ruby Brigade Monthly Meetup"
+    date: "2026-05-18"
+    location: "Dublin, Ohio, United States"
+
+  - name: "Open Hax"
+    date: "2026-05-19"
+    location: "Jacksonville, Florida, United States"
+
+  - name: "Docker and Ruby on Rails by Hugues"
+    date: "2026-05-20"
+    location: "Montreal, Canada"
+
+  - name: "Cocktails + Code"
+    date: "2026-05-21"
+    location: "Portland, Oregon, United States"
+
+  - name: "The Principal Dev – Masterclass for Tech Leads"
+    date: "2026-05-28"
+    location: "Online / TBD"
+
+  - name: "Clean Architecture Masterclass"
+    date: "2026-05-28"
+    location: "Online / TBD"
+
   - name: "RubyConf Austria 2026"
     date: "2026-05-29"
     location: "Vienna, Austria"
+
+  - name: "Code til Dawn (May)"
+    date: "2026-05-29"
+    location: "Saint Louis, Missouri, United States"
 
   - name: "Sekigahara RubyKaigi 01"
     date: "2026-05-30"
     location: "Sekigahara, Gifu, Japan"
 
+  - name: "Ruby Hack Night"
+    date: "2026-06-02"
+    location: "Online"
+
+  - name: "First Wednesday Of The Month - Ruby"
+    date: "2026-06-03"
+    location: "Prague, Czech Republic, Europe"
+
+  - name: "SD Ruby Monthly Meetup"
+    date: "2026-06-05"
+    location: "San Diego, California, United States"
+
   - name: "Matsue RubyKaigi 12"
     date: "2026-06-06"
     location: "Matsue, Shimane, Japan"
+
+  - name: "NYC.rb Event"
+    date: "2026-06-10"
+    location: "Online"
+
+  - name: "[VIRTUAL] The Atlanta Ruby Meetup Group Monthly Meetup"
+    date: "2026-06-10"
+    location: "Online"
+
+  - name: "Indy.rb - The Indianapolis Ruby Brigade Monthly Meetup"
+    date: "2026-06-10"
+    location: "Indianapolis, Indiana, United States"
 
   - name: "Blastoff Rails 2026"
     date: "2026-06-11"
     location: "Albuquerque, NM, United States"
 
-  - name: "Baltic Ruby 2026"
+  - name: "Ruby Thursday: How To Win A Hackathon by David Ger"
+    date: "2026-06-11"
+    location: "Nairobi, Kenya, Africa"
+
+  - name: "Ruby Thursday:"
+    date: "2026-06-11"
+    location: "Nairobi, Kenya, Africa"
+
+  - name: "Baltic Ruby 2026 (Cancelled)"
     date: "2026-06-12"
-    location: "Hamburg, Germany"
+    location: "Hamburg, Germany (Cancelled)"
+
+  - name: "Miami Ruby Brigade"
+    date: "2026-06-15"
+    location: "Coral Gables, Florida, United States"
+
+  - name: "Columbus Ruby Brigade Monthly Meetup"
+    date: "2026-06-15"
+    location: "Dublin, Ohio, United States"
+
+  - name: "Monthly Meetup"
+    date: "2026-06-17"
+    location: "Online"
+
+  - name: "Online: Monthly Meeting"
+    date: "2026-06-17"
+    location: "Online"
+
+  - name: "Cocktails + Code"
+    date: "2026-06-18"
+    location: "Portland, Oregon, United States"
 
   - name: "Brighton Ruby 2026"
     date: "2026-06-25"
     location: "Brighton, England, United Kingdom"
 
+  - name: "Code til Dawn (June)"
+    date: "2026-06-26"
+    location: "Saint Louis, Missouri, United States"
+
   - name: "Tokyo RubyKaigi 13"
     date: "2026-06-27"
     location: "Tokyo, Japan"
+
+  - name: "First Wednesday Of The Month - Ruby"
+    date: "2026-07-01"
+    location: "Prague, Czech Republic, Europe"
+
+  - name: "Ruby Hack Night"
+    date: "2026-07-07"
+    location: "Online"
+
+  - name: "NYC.rb Event"
+    date: "2026-07-08"
+    location: "Online"
+
+  - name: "[VIRTUAL] The Atlanta Ruby Meetup Group Monthly Meetup"
+    date: "2026-07-08"
+    location: "Online"
+
+  - name: "Indy.rb - The Indianapolis Ruby Brigade Monthly Meetup"
+    date: "2026-07-08"
+    location: "Indianapolis, Indiana, United States"
+
+  - name: "Ruby Thursday:"
+    date: "2026-07-09"
+    location: "Nairobi, Kenya, Africa"
+
+  - name: "Ruby Thursday: How To Win A Hackathon by David Ger"
+    date: "2026-07-09"
+    location: "Nairobi, Kenya, Africa"
 
   - name: "RubyConf 2026"
     date: "2026-07-14"
     location: "Las Vegas, NV, United States"
 
+  - name: "Monthly Meetup"
+    date: "2026-07-15"
+    location: "Online"
+
+  - name: "Online: Monthly Meeting"
+    date: "2026-07-15"
+    location: "Online"
+
+  - name: "Cocktails + Code"
+    date: "2026-07-16"
+    location: "Portland, Oregon, United States"
+
   - name: "Kansai RubyKaigi 09"
     date: "2026-07-18"
     location: "Otsu, Shiga, Japan"
 
+  - name: "Miami Ruby Brigade"
+    date: "2026-07-20"
+    location: "Coral Gables, Florida, United States"
+
+  - name: "Columbus Ruby Brigade Monthly Meetup"
+    date: "2026-07-20"
+    location: "Dublin, Ohio, United States"
+
+  - name: "First Wednesday Of The Month - Ruby"
+    date: "2026-08-05"
+    location: "Prague, Czech Republic, Europe"
+
+  - name: "Ruby Hack Night"
+    date: "2026-08-04"
+    location: "Online"
+
+  - name: "Ruby Taiwan Track @ COSCUP 2026"
+    date: "2026-08-08"
+    location: "Taipei, Taiwan"
+
+  - name: "NYC.rb Event"
+    date: "2026-08-12"
+    location: "Online"
+
+  - name: "[VIRTUAL] The Atlanta Ruby Meetup Group Monthly Meetup"
+    date: "2026-08-12"
+    location: "Online"
+
+  - name: "Indy.rb - The Indianapolis Ruby Brigade Monthly Meetup"
+    date: "2026-08-12"
+    location: "Indianapolis, Indiana, United States"
+
+  - name: "Columbus Ruby Brigade Monthly Meetup"
+    date: "2026-08-17"
+    location: "Dublin, Ohio, United States"
+
+  - name: "Miami Ruby Brigade"
+    date: "2026-08-17"
+    location: "Coral Gables, Florida, United States"
+
+  - name: "Monthly Meetup"
+    date: "2026-08-19"
+    location: "Online"
+
+  - name: "Online: Monthly Meeting"
+    date: "2026-08-19"
+    location: "Online"
+
+  - name: "Cocktails + Code"
+    date: "2026-08-20"
+    location: "Portland, Oregon, United States"
+
   - name: "RubyConf Africa 2026"
     date: "2026-08-21"
     location: "Nairobi, Kenya"
+
+  - name: "SD Ruby Monthly Meetup"
+    date: "2026-09-04"
+    location: "San Diego, California, United States"
 
   - name: "Rails Camp West 2026"
     date: "2026-09-07"
@@ -108,9 +312,17 @@ events:
     date: "2026-09-23"
     location: "Austin, TX, United States"
 
+  - name: "Rocky Mountain Ruby 2026"
+    date: "2026-09-28"
+    location: "Boulder, CO, United States"
+
   - name: "tiny ruby #{conf} 2026"
     date: "2026-10-01"
     location: "Helsinki, Finland"
+
+  - name: "Deccan Queen on Rails 2026"
+    date: "2026-10-08"
+    location: "Pune, MH, India"
 
   - name: "Kaigi on Rails 2026"
     date: "2026-10-16"
@@ -119,3 +331,11 @@ events:
   - name: "Helvetic Ruby 2026"
     date: "2026-11-19"
     location: "Zurich, Switzerland"
+
+  - name: "SD Ruby Monthly Meetup"
+    date: "2026-12-04"
+    location: "San Diego, California, United States"
+
+  - name: "RubyKaigi 2027"
+    date: "2027-04-14"
+    location: "Miyazaki, Japan"
