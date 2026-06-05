@@ -14,9 +14,12 @@ RSpec.describe GD::Image do
       expect { GD::Image.new(-1, 10) }.to raise_error(ArgumentError)
     end
 
-    it "allows empty initialize" do
+    it "requires width and height" do
       img = GD::Image.allocate
-      expect { img.send(:initialize) }.not_to raise_error
+
+      expect {
+        img.send(:initialize)
+      }.to raise_error(ArgumentError, /width and height are required/)
     end
   end
 end
