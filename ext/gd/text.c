@@ -56,7 +56,7 @@ static VALUE gd_image_text_bbox(VALUE self, VALUE text, VALUE opts) {
   memset(&extra, 0, sizeof(extra));
 
   char *err = gdImageStringFTEx(
-    wrap->img,
+    NULL,
     brect,
     0,           /* no color, we don't draw */
     font,

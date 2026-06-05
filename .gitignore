@@ -4,3 +4,9 @@
 /ext/gd/*.so
 /ext/gd/*.bundle
 demo/rsn_events_bot/rsn_events.png
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v4/
+examples/jupyter-notebooks/.ipynb_checkpoints/Hist2D-Copy1-checkpoint.ipynb
+examples/jupyter-notebooks/Hist2D-Copy1.ipynb
+

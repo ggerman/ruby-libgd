@@ -1,4 +1,44 @@
 # Changelog
+## v0.3.1
+
+### Security
+
+- Hardened `GD::Image` initialization to prevent creation of partially initialized image objects.
+- `GD::Image.new` now requires explicit `width` and `height` arguments.
+- Added validation to reject zero or negative image dimensions.
+- Added NULL-pointer guards across image operations to prevent dereferencing uninitialized image structures.
+- Improved defensive programming around image cloning and copy operations.
+
+### Fixed
+
+#### `GD::Image.new`
+
+- `GD::Image.new` no longer returns an object with `img == NULL`.
+- Calling `GD::Image.new` without dimensions now raises:
+
+```ruby
+ArgumentError: width and height are required
+
+### Fixed
+
+#### Text Bounding Box Rendering
+
+- Fixed an issue where `GD::Image#text_bbox` could unexpectedly render text onto the target image while calculating text metrics.
+- Bounding box calculations are now guaranteed to be side-effect free.
+- Text measurement no longer modifies image pixels.
+- Prevents "ghost text" artifacts appearing in generated images when only text dimensions are requested.
+
+Example:
+
+```ruby
+img.text_bbox(
+  "text",
+  font: font,
+  size: 45,
+  angle: 0
+)
+```
+
 ## v0.3.0
 
 ### Added
