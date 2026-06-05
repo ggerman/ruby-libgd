@@ -48,6 +48,41 @@ static VALUE gd_image_initialize(int argc, VALUE *argv, VALUE self) {
   return self;
 }
 
+static VALUE gd_image_initialize_true_color(VALUE self, VALUE width, VALUE height) {
+  gd_image_wrapper *wrap;
+  TypedData_Get_Struct(self, gd_image_wrapper, &gd_image_type, wrap);
+
+  if (wrap->img) {
+    gdImageDestroy(wrap->img);
+  }
+
+  int w = NUM2INT(width);
+  int h = NUM2INT(height);
+  if (w <= 0 || h <= 0) {
+    rb_raise(rb_eArgError, "width and height must be positive");
+  }
+
+  wrap->img = gdImageCreateTrueColor(w, h);
+  if (!wrap->img) {
+    rb_raise(rb_eRuntimeError, "failed to create true color image");
+  }
+
+  // Opcional: desactivar el fondo transparente si no lo necesitas
+  gdImageSaveAlpha(wrap->img, 1);
+  gdImageAlphaBlending(wrap->img, 0);
+
+  int t = gdTrueColorAlpha(0,0,0,127);
+  gdImageFilledRectangle(wrap->img, 0,0, w-1, h-1, t);
+
+  return self;
+}
+
+static VALUE gd_image_s_new_true_color(VALUE klass, VALUE width, VALUE height) {
+  VALUE img = rb_obj_alloc(klass);
+  rb_funcall(img, rb_intern("initialize"), 2, width, height);
+  return img;
+}
+
 /* ---------------------------------------------------------
  * initialize_copy (correct way for clone/dup)
  * --------------------------------------------------------- */
@@ -303,6 +338,7 @@ void gd_define_image(VALUE mGD) {
   rb_define_method(cGDImage, "copy", gd_image_copy, 7);
 
   rb_define_singleton_method(cGDImage, "open", gd_image_open, 1);
+  rb_define_singleton_method(cGDImage, "new_true_color", gd_image_s_new_true_color, 2);
 
   rb_define_method(cGDImage, "alpha_blending=", gd_image_alpha_blending, 1);
   rb_define_method(cGDImage, "save_alpha=", gd_image_save_alpha, 1);
