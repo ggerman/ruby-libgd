@@ -1,6 +1,67 @@
 require "spec_helper"
 
 RSpec.describe GD::Image do
+  # ─────────────────────────────────────────────────────────────
+  # initialize
+  # ─────────────────────────────────────────────────────────────
+
+  describe ".new" do
+    context "with no arguments" do
+      it "raises ArgumentError" do
+        expect { GD::Image.new }.to raise_error(ArgumentError, /width and height are required/)
+      end
+    end
+
+    context "with a single argument" do
+      it "raises ArgumentError" do
+        expect { GD::Image.new(100) }.to raise_error(ArgumentError, /expected 0 or 2 arguments/)
+      end
+    end
+
+    context "with valid dimensions" do
+      it "creates the image without error" do
+        expect { GD::Image.new(100, 100) }.not_to raise_error
+      end
+    end
+
+    context "with dimensions <= 0" do
+      it "raises ArgumentError when width is 0" do
+        expect { GD::Image.new(0, 100) }.to raise_error(ArgumentError, /must be positive/)
+      end
+
+      it "raises ArgumentError when height is negative" do
+        expect { GD::Image.new(100, -1) }.to raise_error(ArgumentError, /must be positive/)
+      end
+    end
+  end
+
+  # ─────────────────────────────────────────────────────────────
+  # NULL guard on instance methods
+  # ─────────────────────────────────────────────────────────────
+
+  describe "methods on an uninitialized image" do
+    let(:img) { GD::Image.allocate }  # wrap->img = NULL
+
+    it "#width raises RuntimeError" do
+      expect { img.width }.to raise_error(RuntimeError, /not initialized/)
+    end
+
+    it "#height raises RuntimeError" do
+      expect { img.height }.to raise_error(RuntimeError, /not initialized/)
+    end
+
+    it "#alpha_blending= raises RuntimeError" do
+      expect { img.alpha_blending = true }.to raise_error(RuntimeError, /not initialized/)
+    end
+
+    it "#save_alpha= raises RuntimeError" do
+      expect { img.save_alpha = true }.to raise_error(RuntimeError, /not initialized/)
+    end
+
+    it "#antialias= raises RuntimeError" do
+      expect { img.antialias = true }.to raise_error(RuntimeError, /not initialized/)
+    end
+  end
   it "creates and saves a blank image" do
     img = GD::Image.new(100,100)
     img.save("#{TMP}/blank.png")
