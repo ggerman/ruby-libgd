@@ -19,7 +19,7 @@
 
 ---
 
-Germán Alberto Giménez Silva | Remote | 🟢 Open to work
+Germán Alberto Giménez Silva | Remote
 
 ---
 # Create Images with Ruby – Dynamic Image Generation using ruby-libgd
